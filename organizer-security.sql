@@ -59,6 +59,15 @@ for update to authenticated
 using (public.is_civil_organizer())
 with check (public.is_civil_organizer());
 
+-- Explicit table privileges are required in addition to RLS.
+-- Students may create registrations/proof rows, but cannot directly read or update them.
+grant insert on table public.registrations to anon, authenticated;
+grant select, update on table public.registrations to authenticated;
+grant insert on table public.payment_proofs to anon, authenticated;
+grant select, update on table public.payment_proofs to authenticated;
+grant select on table public.event_config to anon, authenticated;
+grant update on table public.event_config to authenticated;
+
 -- Payment proofs are sensitive, so the bucket is private.
 update storage.buckets set public = false where id = 'civil-payment-proofs';
 drop policy if exists "public can read civil payment proof" on storage.objects;
