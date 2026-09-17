@@ -15,24 +15,27 @@
 <section class="section" id="loginSection">
   <div class="section-heading"><span>01</span><h3>Organizer login</h3></div>
   <div class="auth-grid">
-    <div class="form-panel auth-panel">
-      <p class="muted">Sign in with an approved Civil organizer account.</p>
-      <form id="loginForm">
-        <label>Email<input type="email" name="email" autocomplete="username" required></label>
-        <label>Password<input type="password" name="password" autocomplete="current-password" required></label>
-        <button class="primary-btn" type="submit">Sign in</button>
+    <div class="form-panel auth-panel login-card">
+      <div class="auth-icon">CE</div>
+      <p class="eyebrow">APPROVED ORGANIZER</p>
+      <h3>Welcome back</h3>
+      <p class="auth-copy">Sign in to review registrations, open payment proofs and verify contributions.</p>
+      <form id="loginForm" class="auth-form">
+        <label>Email address<input type="email" name="email" autocomplete="username" placeholder="organizer@example.com" required></label>
+        <label>Password<input type="password" name="password" autocomplete="current-password" placeholder="••••••••" required></label>
+        <button class="primary-btn auth-submit" type="submit"><span>Sign in to dashboard</span><span>↗</span></button>
         <p id="loginMessage" class="form-message"></p>
       </form>
     </div>
-    <div class="form-panel auth-panel">
-      <p class="eyebrow">NEW ORGANIZER</p>
-      <h3>Request organizer access</h3>
-      <p class="muted">Create an organizer account. Access remains pending until the main admin approves it.</p>
-      <form id="organizerRequestForm">
-        <label>Name<input type="text" name="name" autocomplete="name" required></label>
-        <label>Email<input type="email" name="email" autocomplete="email" required></label>
-        <label>Password<input type="password" name="password" autocomplete="new-password" minlength="8" required></label>
-        <button class="outline-btn" type="submit">Register as organizer</button>
+    <div class="form-panel auth-panel request-card">
+      <div class="request-top"><p class="eyebrow">NEW ORGANIZER</p><span class="request-dot"></span></div>
+      <h3>Request access</h3>
+      <p class="auth-copy">Create your account first. The main admin reviews every new organizer request.</p>
+      <form id="organizerRequestForm" class="auth-form">
+        <label>Full name<input type="text" name="name" autocomplete="name" placeholder="Your name" required></label>
+        <label>Email address<input type="email" name="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>Create password<input type="password" name="password" autocomplete="new-password" placeholder="Minimum 8 characters" minlength="8" required></label>
+        <button class="outline-btn auth-submit request-submit" type="submit"><span>Register as organizer</span><span>→</span></button>
         <p id="requestMessage" class="form-message"></p>
       </form>
     </div>
