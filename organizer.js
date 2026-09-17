@@ -7,8 +7,11 @@ const $ = (s) => document.querySelector(s);
 let registrations = [];
 let selected = null;
 
+const MAIN_ADMIN_EMAIL = 'pqdmshreeambasta@gmail.com';
 const loginSection = $('#loginSection'), dashboard = $('#dashboard');
 const loginMessage = $('#loginMessage'), tableMessage = $('#tableMessage');
+const requestMessage = $('#requestMessage'), accessMessage = $('#accessMessage');
+const isMainAdmin = () => String(supabase.auth.getUser ? '' : '').length === -1;
 function message(el, text, error=false) { el.textContent = text; el.classList.toggle('error-message', error); }
 function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function statusLabel(s) { return s === 'submitted' ? 'Proof submitted' : s === 'verified' ? 'Verified' : s === 'rejected' ? 'Rejected' : 'Pending'; }
@@ -36,6 +39,40 @@ function renderStats() {
   $('#statPending').textContent = registrations.filter(r => r.payment_status === 'submitted').length;
   $('#statVerified').textContent = registrations.filter(r => r.payment_status === 'verified').length;
   $('#statRejected').textContent = registrations.filter(r => r.payment_status === 'rejected').length;
+}
+async function currentUser() {
+  const { data: { user } } = await supabase.auth.getUser();
+  return user || null;
+}
+function isAdminUser(user) {
+  return String(user?.email || '').toLowerCase() === MAIN_ADMIN_EMAIL;
+}
+async function loadOrganizerRequests() {
+  const user = await currentUser();
+  const panel = $('#organizerAccessPanel');
+  if (!panel) return;
+  if (!isAdminUser(user)) {
+    panel.innerHTML = '<div class="access-header"><div><p class="eyebrow">ORGANIZER ACCESS</p><h3>Approval required</h3><p class="muted">New organizer accounts must be approved by the main admin before they can access the dashboard.</p></div></div>';
+    return;
+  }
+  const { data, error } = await supabase.rpc('list_civil_organizer_requests');
+  if (error) { message(accessMessage, error.message, true); return; }
+  const rows = data || [];
+  $('#accessRequests').innerHTML = rows.length ? rows.map(r => `
+    <div class="access-request">
+      <div><strong>${esc(r.name || 'Organizer')}</strong><small>${esc(r.email)}</small><span>${esc(r.status)} · ${new Date(r.requested_at).toLocaleString()}</span></div>
+      ${r.status === 'pending' ? '<div class="access-actions"><button class="primary-btn approve-organizer" data-request="'+esc(r.id)+'">Approve</button><button class="danger-btn reject-organizer" data-request="'+esc(r.id)+'">Reject</button></div>' : '<span class="status status-'+esc(r.status)+'">'+esc(r.status)+'</span>'}
+    </div>`).join('') : '<div class="access-empty">No organizer access requests.</div>';
+  document.querySelectorAll('.approve-organizer').forEach(b => b.addEventListener('click', () => reviewOrganizer(b.dataset.request, 'approve')));
+  document.querySelectorAll('.reject-organizer').forEach(b => b.addEventListener('click', () => reviewOrganizer(b.dataset.request, 'reject')));
+}
+async function reviewOrganizer(requestId, action) {
+  message(accessMessage, action === 'approve' ? 'Approving organizer…' : 'Rejecting request…');
+  const rpc = action === 'approve' ? 'approve_civil_organizer' : 'reject_civil_organizer';
+  const { error } = await supabase.rpc(rpc, { p_request_id: requestId });
+  if (error) { message(accessMessage, error.message, true); return; }
+  message(accessMessage, action === 'approve' ? 'Organizer approved successfully.' : 'Organizer request rejected.');
+  await loadOrganizerRequests();
 }
 function renderRows() {
   const q = $('#searchInput').value.trim().toLowerCase(), filter = $('#statusFilter').value;
@@ -85,21 +122,29 @@ $('#loginForm').addEventListener('submit', async (e) => {
   if (error) { message(loginMessage, error.message, true); return; }
   const auth = await isOrganizer();
   if (!auth.ok) { await supabase.auth.signOut(); message(loginMessage, auth.reason, true); return; }
-  loginSection.hidden = true; dashboard.hidden = false; await Promise.all([loadRegistrations(), loadConfig()]);
+  loginSection.hidden = true; dashboard.hidden = false; await Promise.all([loadRegistrations(), loadOrganizerRequests()]);
 });
 $('#refreshBtn').addEventListener('click', loadRegistrations); $('#searchInput').addEventListener('input', renderRows); $('#statusFilter').addEventListener('change', renderRows);
 $('#verifyBtn').addEventListener('click', () => setPaymentStatus('verified')); $('#rejectBtn').addEventListener('click', () => setPaymentStatus('rejected'));
 $('#logoutBtn').addEventListener('click', async () => { await supabase.auth.signOut(); dashboard.hidden = true; loginSection.hidden = false; });
 document.querySelectorAll('[data-close-modal]').forEach(el => el.addEventListener('click', () => { $('#studentModal').hidden = true; }));
-$('#configForm').addEventListener('submit', async (e) => {
-  e.preventDefault(); const payload = { id:true, contribution:Number($('#configContribution').value || 0), event_date:$('#configDate').value.trim() || 'To be announced', venue:$('#configVenue').value.trim() || 'SMVDU Campus', support_text:$('#configSupport').value.trim() || 'Contact Civil organizers' };
-  const { error } = await supabase.from('event_config').update(payload).eq('id', true); message($('#configMessage'), error ? error.message : 'Event configuration saved.', !!error);
+$('#organizerRequestForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(e.currentTarget));
+  message(requestMessage, 'Creating organizer account…');
+  const { data, error } = await supabase.auth.signUp({ email:d.email.trim().toLowerCase(), password:d.password, options:{data:{full_name:d.name.trim()}} });
+  if (error) { message(requestMessage, error.message, true); return; }
+  const { error: requestError } = await supabase.rpc('request_civil_organizer', { p_email:d.email.trim().toLowerCase(), p_name:d.name.trim() });
+  if (requestError) { message(requestMessage, requestError.message, true); return; }
+  if (data?.session) await supabase.auth.signOut();
+  message(requestMessage, 'Request submitted. The main admin must approve your organizer access.');
+  e.currentTarget.reset();
 });
 async function checkSession() {
   if (!cfg.supabaseUrl || !cfg.supabaseAnonKey) { message(loginMessage, 'Configure Civil Supabase in config.js first.', true); return; }
   const { data: { session } } = await supabase.auth.getSession(); if (!session) return;
   const auth = await isOrganizer();
   if (!auth.ok) { await supabase.auth.signOut(); message(loginMessage, auth.reason, true); return; }
-  loginSection.hidden = true; dashboard.hidden = false; await Promise.all([loadRegistrations(), loadConfig()]);
+  loginSection.hidden = true; dashboard.hidden = false; await Promise.all([loadRegistrations(), loadOrganizerRequests()]);
 }
 checkSession();
