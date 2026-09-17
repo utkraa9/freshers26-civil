@@ -8,15 +8,86 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header class="topbar"><div class="brand"><div class="brand-mark">CE</div><div><p class="eyebrow">SHRI MATA VAISHNO DEVI UNIVERSITY</p><h1>Civil Engineering</h1></div></div><a class="outline-btn" href="#lookup">Check Pass</a></header>
-<main>
-<section class="hero"><div class="hero-copy"><span class="pill">FRESHERS'26</span><h2>Build the beginning<br><span>of something big.</span></h2><p>Freshers'26 for the Civil Engineering department. Register, complete the contribution, upload proof and receive your verified event pass.</p><div class="hero-actions"><a class="primary-btn" href="#register">Register Now</a><a class="text-btn" href="#how">How it works ↓</a></div></div><div class="hero-card"><div class="card-top"><span>EVENT PASS</span><span>CE · 26</span></div><div class="card-number">FRESHERS</div><div class="card-footer"><span>SMVDU</span><span>CIVIL ENGINEERING</span></div></div></section>
-<section class="stats"><div><strong>01</strong><span>Register</span></div><div><strong>02</strong><span>Pay contribution</span></div><div><strong>03</strong><span>Upload proof</span></div><div><strong>04</strong><span>Get verified pass</span></div></section>
-<section class="section" id="how"><div class="section-heading"><span>01</span><h3>How it works</h3></div><div class="steps"><article><span>1</span><h4>Register</h4><p>Enter your details carefully and receive a unique Civil reference ID.</p></article><article><span>2</span><h4>Contribute</h4><p>Pay using either of the Civil department UPI accounts shown below.</p></article><article><span>3</span><h4>Submit proof</h4><p>Upload a clear payment screenshot against your reference ID.</p></article><article><span>4</span><h4>Get your pass</h4><p>After organizer verification, your event pass status becomes verified.</p></article></div></section>
-<section class="section contribution" id="register"><div class="section-heading"><span>02</span><h3>Registration</h3></div><div class="form-panel"><form id="registrationForm"><div class="form-grid"><label>Full name<input name="full_name" required placeholder="Your full name" /></label><label>Entry number<input name="entry_number" required placeholder="25xxx000" /></label><label>Phone number<input name="phone" required inputmode="tel" pattern="[0-9]{10}" placeholder="10-digit number" /></label><label>Year<select name="year" required><option value="">Select year</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></label><label class="full">Email<input name="email" type="email" required placeholder="name@example.com" /></label></div><div class="amount-box"><div><span>Contribution</span><strong id="amountLabel">Amount to be announced</strong></div><span id="amountHint">Civil organizers will set the contribution amount later.</span></div><button class="primary-btn" type="submit">Create Registration</button><p class="form-message" id="registrationMessage"></p></form></div></section>
-<section class="section payment"><div class="section-heading"><span>03</span><h3>Payment & proof</h3></div><div class="payment-grid"><div class="qr-panel"><div class="panel-label">CIVIL DEPARTMENT UPI</div><div id="qrPlaceholder" class="qr-list"></div><p id="upiText">Choose either Civil UPI account to pay.</p></div><div class="proof-panel"><form id="proofForm"><label>Reference ID<input name="reference_id" required placeholder="e.g. CIV-26-AB12CD34" /></label><label>Payment screenshot<input name="screenshot" type="file" accept="image/png,image/jpeg,image/webp" required /></label><button class="primary-btn" type="submit">Submit Payment Proof</button><p class="form-message" id="proofMessage"></p></form></div></div></section>
-<section class="section lookup" id="lookup"><div class="section-heading"><span>04</span><h3>Pass lookup</h3></div><div class="lookup-box"><form id="lookupForm"><label>Reference ID<input name="reference_id" required placeholder="Enter your Civil reference ID" /></label><button class="primary-btn" type="submit">Check Status</button></form><div id="lookupResult" class="lookup-result" aria-live="polite"></div></div></section>
-<section class="section details"><div class="section-heading"><span>05</span><h3>Event details</h3></div><div class="detail-grid"><div><span>Date</span><strong id="eventDate">To be announced</strong></div><div><span>Venue</span><strong id="eventVenue">SMVDU Campus</strong></div><div><span>Department</span><strong>Civil Engineering</strong></div><div><span>Support</span><strong id="eventSupport">Contact Civil organizers</strong></div></div></section>
-</main><footer>© 2026 Civil Engineering · Shri Mata Vaishno Devi University · Freshers'26 · <a href="organizer.html">Organizer</a></footer>
-<script src="config.js"></script><script type="module" src="app.js"></script>
-</body></html>
+  <div class="blueprint-grid" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Freshers 26 Civil Engineering home">
+      <div class="brand-mark"><span>CE</span><i></i></div>
+      <div><p class="eyebrow">SMVDU · SCHOOL OF CIVIL ENGINEERING</p><h1>FRESHERS<span>'26</span></h1></div>
+    </a>
+    <nav><a href="#register">Register</a><a href="#payment">Payment</a><a href="#lookup">Pass</a><a class="outline-btn" href="organizer.html">Organizer</a></nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="construction-tag"><span class="dot"></span> CIVIL ENGINEERING · SMVDU</div>
+        <p class="hero-kicker">YOUR FIRST BUILD STARTS HERE</p>
+        <h2>Lay the<br><em>foundation.</em><br>Build the memory.</h2>
+        <p class="hero-desc">Freshers'26 — a Civil Engineering welcome built for new beginnings, new people and one unforgettable campus chapter.</p>
+        <div class="hero-actions"><a class="primary-btn" href="#register">Register Now <span>↗</span></a><a class="text-btn" href="#how">Explore the site ↓</a></div>
+        <div class="hero-meta"><span><b>01</b> Register</span><span><b>02</b> Contribute</span><span><b>03</b> Get verified</span></div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="site-plan">
+          <div class="plan-top"><span>CE / 26</span><span>DWG. 01</span></div>
+          <div class="survey-line l1"></div><div class="survey-line l2"></div><div class="survey-line l3"></div>
+          <div class="building"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          <div class="road r1"></div><div class="road r2"></div>
+          <div class="north">N <span>↑</span></div>
+          <div class="dimension d1"><span>FRESHERS'26</span></div>
+          <div class="dimension d2"><span>SMVDU</span></div>
+          <div class="stamp">CIVIL<br><small>ENGINEERING</small></div>
+          <div class="coordinate">32°59' · 74°57'</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="blueprint-strip">
+      <span>STRUCTURE</span><i></i><span>FOUNDATION</span><i></i><span>DESIGN</span><i></i><span>COMMUNITY</span><i></i><span>FRESHERS'26</span>
+    </section>
+
+    <section class="section" id="how">
+      <div class="section-heading"><span>01 / PROCESS</span><h3>From registration<br><em>to ready.</em></h3><p>A simple four-stage flow. Keep your reference ID safe throughout the process.</p></div>
+      <div class="steps">
+        <article><div class="step-icon">01</div><div><h4>Register</h4><p>Enter your details carefully and receive a unique Civil reference ID.</p></div><span class="technical">DATA →</span></article>
+        <article><div class="step-icon">02</div><div><h4>Contribute</h4><p>Pay using either Civil department UPI account shown in the payment section.</p></div><span class="technical">UPI →</span></article>
+        <article><div class="step-icon">03</div><div><h4>Submit proof</h4><p>Upload a clear payment screenshot against your reference ID.</p></div><span class="technical">PROOF →</span></article>
+        <article><div class="step-icon">04</div><div><h4>Get verified</h4><p>Once organizers verify your payment, your pass becomes ready.</p></div><span class="technical">PASS ✓</span></article>
+      </div>
+    </section>
+
+    <section class="section contribution" id="register">
+      <div class="section-heading"><span>02 / REGISTRATION</span><h3>Get on the<br><em>site plan.</em></h3><p>Your registration creates the reference used for payment proof and pass lookup.</p></div>
+      <div class="form-panel construction-panel">
+        <div class="panel-ruler"><span>REGISTRATION FORM</span><span>CE-26 / 001</span></div>
+        <form id="registrationForm">
+          <div class="form-grid"><label>Full name<input name="full_name" required placeholder="Your full name" /></label><label>Entry number<input name="entry_number" required placeholder="25xxx000" /></label><label>Phone number<input name="phone" required inputmode="tel" pattern="[0-9]{10}" placeholder="10-digit number" /></label><label>Year<select name="year" required><option value="">Select year</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></label><label class="full">Email<input name="email" type="email" required placeholder="name@example.com" /></label></div>
+          <div class="amount-box"><div><span>CONTRIBUTION</span><strong id="amountLabel">Amount to be announced</strong></div><span id="amountHint">Civil organizers will set the contribution amount later.</span></div>
+          <button class="primary-btn" type="submit">Create Civil Registration <span>↗</span></button><p class="form-message" id="registrationMessage"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section payment" id="payment">
+      <div class="section-heading"><span>03 / PAYMENT</span><h3>Fund the<br><em>foundation.</em></h3><p>Choose either Civil UPI account. After payment, submit your screenshot below.</p></div>
+      <div class="payment-grid">
+        <div class="qr-panel construction-panel"><div class="panel-ruler"><span>UPI PAYMENT</span><span>SCAN / PAY</span></div><div class="panel-label">CIVIL DEPARTMENT UPI</div><div id="qrPlaceholder" class="qr-list"></div><p id="upiText">Choose either Civil UPI account to pay.</p></div>
+        <div class="proof-panel construction-panel"><div class="panel-ruler"><span>PAYMENT PROOF</span><span>MAX 5 MB</span></div><form id="proofForm"><label>Reference ID<input name="reference_id" required placeholder="e.g. CIV-26-AB12CD34" /></label><label>Payment screenshot<input name="screenshot" type="file" accept="image/png,image/jpeg,image/webp" required /></label><button class="primary-btn" type="submit">Submit Payment Proof <span>↗</span></button><p class="form-message" id="proofMessage"></p></form></div>
+      </div>
+    </section>
+
+    <section class="section lookup" id="lookup">
+      <div class="lookup-layout"><div class="section-heading"><span>04 / VERIFICATION</span><h3>Check your<br><em>pass status.</em></h3><p>Enter your Civil reference ID to see the latest payment verification status.</p></div><div class="lookup-box construction-panel"><div class="panel-ruler"><span>PASS LOOKUP</span><span>LIVE STATUS</span></div><form id="lookupForm"><label>Reference ID<input name="reference_id" required placeholder="CIV-26-XXXXXXXX" /></label><button class="primary-btn" type="submit">Check Status <span>↗</span></button></form><div id="lookupResult" class="lookup-result" aria-live="polite"></div></div></div>
+    </section>
+
+    <section class="section details">
+      <div class="section-heading"><span>05 / PROJECT DATA</span><h3>Event<br><em>details.</em></h3><p>The event configuration will update here when organizers publish the final details.</p></div>
+      <div class="detail-grid"><div><span>DATE</span><strong id="eventDate">To be announced</strong><small>EVENT SCHEDULE</small></div><div><span>VENUE</span><strong id="eventVenue">SMVDU Campus</strong><small>PROJECT LOCATION</small></div><div><span>DEPARTMENT</span><strong>Civil Engineering</strong><small>HOST DEPARTMENT</small></div><div><span>SUPPORT</span><strong id="eventSupport">Contact Civil organizers</strong><small>GET IN TOUCH</small></div></div>
+    </section>
+  </main>
+
+  <footer><div><strong>FRESHERS<span>'26</span></strong><p>Civil Engineering · Shri Mata Vaishno Devi University</p></div><div class="footer-tech">CE / 26<br><span>BUILT FOR THE NEXT BATCH</span></div><a href="organizer.html">Organizer ↗</a></footer>
+  <script src="config.js"></script><script type="module" src="app.js"></script>
+</body>
+</html>
