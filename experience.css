@@ -1027,3 +1027,121 @@ body:has(.cinematic-hero) .civil-wordmark .civil-orange{color:#e45124!important}
     font-size:138px;
   }
 }
+
+
+/* =========================================================
+   DESKTOP HERO — split layout
+   Animation stays on the RIGHT on desktop/laptop only.
+   Mobile rules above remain untouched.
+   ========================================================= */
+@media (min-width:901px){
+  body:has(.cinematic-hero) .cinematic-hero{
+    width:min(1240px,calc(100% - 48px));
+    max-width:1240px;
+    min-height:calc(100vh - 72px);
+    margin:0 auto;
+    padding:112px 0 64px;
+    display:block;
+  }
+
+  body:has(.cinematic-hero) .hero-content{
+    width:100%;
+    max-width:none;
+    min-width:0;
+    display:grid;
+    grid-template-columns:minmax(0,1.02fr) minmax(390px,.98fr);
+    grid-template-rows:auto auto auto auto 1fr;
+    column-gap:clamp(30px,5vw,82px);
+    align-items:center;
+    text-align:left;
+  }
+
+  body:has(.cinematic-hero) .hero-content .eyebrow{
+    grid-column:1;
+    grid-row:1;
+    justify-content:flex-start;
+    align-self:end;
+  }
+
+  body:has(.cinematic-hero) .hero-kicker{
+    grid-column:1;
+    grid-row:2;
+    margin-top:26px;
+    align-self:end;
+  }
+
+  body:has(.cinematic-hero) .hero h1{
+    grid-column:1;
+    grid-row:3;
+    align-self:start;
+    margin:12px 0 18px;
+    font-size:clamp(82px,8.8vw,132px);
+    line-height:.82;
+    letter-spacing:-.065em;
+  }
+
+  body:has(.cinematic-hero) .hero h1 em{
+    transform:none;
+  }
+
+  body:has(.cinematic-hero) .hero-art{
+    grid-column:2;
+    grid-row:1 / 6;
+    order:initial;
+    width:100%;
+    height:clamp(360px,38vw,500px);
+    margin:0;
+    align-self:center;
+    display:grid;
+    place-items:center;
+  }
+
+  body:has(.cinematic-hero) .freshers-art{
+    width:100%;
+    height:100%;
+    max-width:620px;
+    margin:0 auto;
+  }
+
+  body:has(.cinematic-hero) .hero-label{
+    right:0;
+    bottom:4%;
+  }
+
+  body:has(.cinematic-hero) .hero-actions{
+    grid-column:1;
+    grid-row:4;
+    justify-content:flex-start;
+    margin-top:8px;
+  }
+
+  body:has(.cinematic-hero) .cinematic-hero:before{
+    right:-2%;
+    top:5%;
+  }
+}
+
+/* Laptop widths: preserve the right-side animation without crowding it. */
+@media (min-width:901px) and (max-width:1150px){
+  body:has(.cinematic-hero) .cinematic-hero{
+    width:calc(100% - 40px);
+    padding-top:105px;
+  }
+
+  body:has(.cinematic-hero) .hero-content{
+    grid-template-columns:minmax(0,1fr) minmax(330px,.82fr);
+    column-gap:32px;
+  }
+
+  body:has(.cinematic-hero) .hero h1{
+    font-size:clamp(72px,8.5vw,104px);
+  }
+
+  body:has(.cinematic-hero) .hero-art{
+    height:380px;
+  }
+
+  body:has(.cinematic-hero) .freshers-art{
+    max-width:500px;
+  }
+}
