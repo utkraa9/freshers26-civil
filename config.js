@@ -8,5 +8,7 @@ window.CIVIL_CONFIG = {
     { id: '8797046815@ibl', name: 'Rudra Abhishek' },
     { id: 'pqdmshreeambasta@okicici', name: 'Rudra Abhishek' }
   ],
-  contribution: 0
+  contribution: 0,
+  juniorContribution: 700,
+  seniorContribution: 1400
 };
