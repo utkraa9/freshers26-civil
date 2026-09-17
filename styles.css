@@ -400,3 +400,43 @@ footer a:hover{color:var(--accent)}
   .access-actions{width:100%}
   .access-actions button{flex:1}
 }
+
+
+/* =========================================================
+   CIVIL ORGANIZER — AUTH PAGE REDESIGN
+   ========================================================= */
+#loginSection .section-heading{margin-bottom:28px}
+#loginSection .section-heading h3{font-size:clamp(30px,4vw,42px);letter-spacing:-.04em}
+#loginSection .auth-grid{align-items:stretch;gap:20px}
+#loginSection .auth-panel{max-width:none;width:100%;margin:0;padding:34px;border-radius:22px;box-shadow:0 18px 50px rgba(40,35,28,.045);position:relative;overflow:hidden}
+#loginSection .login-card{background:var(--ink);color:#fff;border-color:var(--ink)}
+#loginSection .login-card:before{content:'';position:absolute;width:180px;height:180px;right:-70px;top:-80px;border:1px solid rgba(226,121,63,.35);border-radius:50%}
+#loginSection .login-card .auth-icon{width:46px;height:46px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.18);border-radius:12px;color:var(--accent-soft);font:700 12px 'Space Grotesk';margin-bottom:28px}
+#loginSection .auth-panel h3{font-size:34px;line-height:1.05;letter-spacing:-.045em;margin:8px 0 12px}
+#loginSection .auth-copy{color:var(--muted);font-size:13px;line-height:1.65;max-width:430px;margin:0 0 28px}
+#loginSection .login-card .auth-copy{color:rgba(255,255,255,.62)}
+#loginSection .auth-form{display:grid;gap:15px}
+#loginSection .auth-form label{display:grid;gap:7px;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+#loginSection .login-card .auth-form label{color:rgba(255,255,255,.62)}
+#loginSection .auth-form input{width:100%;min-height:48px;padding:13px 14px;margin:0;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);outline:none;font:400 14px Outfit,sans-serif;transition:border-color .2s,box-shadow .2s,background .2s}
+#loginSection .login-card .auth-form input{background:rgba(255,255,255,.07);color:#fff;border-color:rgba(255,255,255,.14)}
+#loginSection .auth-form input::placeholder{color:#aaa}
+#loginSection .login-card .auth-form input::placeholder{color:rgba(255,255,255,.38)}
+#loginSection .auth-form input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(184,85,46,.10)}
+#loginSection .login-card .auth-form input:focus{border-color:var(--accent-soft);box-shadow:0 0 0 3px rgba(226,121,63,.14)}
+#loginSection .auth-submit{width:100%;min-height:50px;margin-top:4px;justify-content:space-between;border-radius:10px;padding:12px 15px}
+#loginSection .login-card .auth-submit{background:var(--accent);border-color:var(--accent)}
+#loginSection .login-card .auth-submit:hover{background:var(--accent-soft);border-color:var(--accent-soft)}
+#loginSection .request-card{background:var(--surface)}
+#loginSection .request-top{display:flex;align-items:center;justify-content:space-between}
+#loginSection .request-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px var(--accent-wash)}
+#loginSection .request-submit{justify-content:space-between;border-radius:10px;background:transparent}
+#loginSection .form-message{margin:2px 0 0;line-height:1.55}
+#loginSection .setup-message{padding:12px 14px;border:1px solid rgba(184,85,46,.25);border-radius:10px;background:var(--accent-wash)}
+#loginSection .setup-message code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px}
+@media(max-width:600px){
+  #loginSection .auth-grid{gap:14px}
+  #loginSection .auth-panel{padding:24px 20px;border-radius:18px}
+  #loginSection .auth-panel h3{font-size:30px}
+  #loginSection .login-card .auth-icon{margin-bottom:22px}
+}
