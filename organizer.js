@@ -13,11 +13,14 @@ function message(el, text, error=false) { el.textContent = text; el.classList.to
 function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function statusLabel(s) { return s === 'submitted' ? 'Proof submitted' : s === 'verified' ? 'Verified' : s === 'rejected' ? 'Rejected' : 'Pending'; }
 
+// Authorization is checked through a SECURITY DEFINER RPC so the browser does not
+// need direct visibility into the organizer allowlist beyond the current user.
 async function isOrganizer() {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return false;
-  const { data, error } = await supabase.from('organizers').select('user_id').eq('user_id', user.id).eq('active', true).maybeSingle();
-  return !error && !!data;
+  const { data: { user }, error: userError } = await supabase.auth.getUser();
+  if (userError || !user) return { ok: false, reason: userError?.message || 'No active session.' };
+  const { data, error } = await supabase.rpc('is_civil_organizer');
+  if (error) return { ok: false, reason: `Authorization check failed: ${error.message}` };
+  return { ok: data === true, reason: data === true ? '' : 'This account is not authorized as a Civil organizer.' };
 }
 
 async function loadConfig() {
@@ -80,7 +83,8 @@ $('#loginForm').addEventListener('submit', async (e) => {
   e.preventDefault(); const d = Object.fromEntries(new FormData(e.currentTarget)); message(loginMessage, 'Signing in…');
   const { error } = await supabase.auth.signInWithPassword({ email: d.email, password: d.password });
   if (error) { message(loginMessage, error.message, true); return; }
-  if (!(await isOrganizer())) { await supabase.auth.signOut(); message(loginMessage, 'This account is not authorized as a Civil organizer.', true); return; }
+  const auth = await isOrganizer();
+  if (!auth.ok) { await supabase.auth.signOut(); message(loginMessage, auth.reason, true); return; }
   loginSection.hidden = true; dashboard.hidden = false; await Promise.all([loadRegistrations(), loadConfig()]);
 });
 $('#refreshBtn').addEventListener('click', loadRegistrations); $('#searchInput').addEventListener('input', renderRows); $('#statusFilter').addEventListener('change', renderRows);
@@ -94,7 +98,8 @@ $('#configForm').addEventListener('submit', async (e) => {
 async function checkSession() {
   if (!cfg.supabaseUrl || !cfg.supabaseAnonKey) { message(loginMessage, 'Configure Civil Supabase in config.js first.', true); return; }
   const { data: { session } } = await supabase.auth.getSession(); if (!session) return;
-  if (!(await isOrganizer())) { await supabase.auth.signOut(); message(loginMessage, 'This account is not authorized as a Civil organizer.', true); return; }
+  const auth = await isOrganizer();
+  if (!auth.ok) { await supabase.auth.signOut(); message(loginMessage, auth.reason, true); return; }
   loginSection.hidden = true; dashboard.hidden = false; await Promise.all([loadRegistrations(), loadConfig()]);
 }
 checkSession();
