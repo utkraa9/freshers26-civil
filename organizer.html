@@ -1,15 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Civil Freshers'26 — Organizer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Civil Freshers'26 — Organizer Dashboard</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header class="topbar"><div class="brand"><div class="brand-mark">CE</div><div><p class="eyebrow">CIVIL ENGINEERING</p><h1>Organizer Console</h1></div></div><a class="outline-btn" href="index.html">Public site</a></header>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark">CE</div><div><p class="eyebrow">CIVIL ENGINEERING</p><h1>Organizer Dashboard</h1></div></div>
+  <a class="outline-btn" href="index.html">Public site</a>
+</header>
 <main>
-<section class="section" id="loginSection"><div class="section-heading"><span>01</span><h3>Organizer login</h3></div><div class="form-panel"><form id="loginForm"><label>Email<input type="email" name="email" required></label><label style="display:block;margin-top:18px">Password<input type="password" name="password" required></label><button class="primary-btn" style="margin-top:20px" type="submit">Sign in</button><p id="loginMessage" class="form-message"></p></form></div></section>
-<section class="section" id="dashboard" hidden><div class="section-heading"><span>02</span><h3>Registrations</h3></div><div class="form-panel" style="max-width:none;overflow:auto"><div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px"><button class="primary-btn" id="refreshBtn">Refresh</button><button class="outline-btn" id="logoutBtn">Sign out</button></div><div id="tableWrap"></div></div></section>
+<section class="section" id="loginSection">
+  <div class="section-heading"><span>01</span><h3>Organizer login</h3></div>
+  <div class="form-panel auth-panel">
+    <p class="muted">Sign in with the organizer account created in this Civil-only Supabase project.</p>
+    <form id="loginForm">
+      <label>Email<input type="email" name="email" autocomplete="username" required></label>
+      <label>Password<input type="password" name="password" autocomplete="current-password" required></label>
+      <button class="primary-btn" type="submit">Sign in</button>
+      <p id="loginMessage" class="form-message"></p>
+    </form>
+  </div>
+</section>
+
+<section class="section" id="dashboard" hidden>
+  <div class="dashboard-head">
+    <div><p class="eyebrow">CIVIL / FRESHERS'26</p><h2>Registration control room</h2></div>
+    <button class="outline-btn" id="logoutBtn">Sign out</button>
+  </div>
+
+  <div class="admin-stats">
+    <article><span>Total</span><strong id="statTotal">0</strong></article>
+    <article><span>Pending proof</span><strong id="statPending">0</strong></article>
+    <article><span>Verified</span><strong id="statVerified">0</strong></article>
+    <article><span>Rejected</span><strong id="statRejected">0</strong></article>
+  </div>
+
+  <div class="admin-toolbar">
+    <input id="searchInput" placeholder="Search name, entry number, phone or reference…">
+    <select id="statusFilter"><option value="all">All statuses</option><option value="pending">Pending</option><option value="submitted">Submitted</option><option value="verified">Verified</option><option value="rejected">Rejected</option></select>
+    <button class="primary-btn" id="refreshBtn">Refresh</button>
+  </div>
+
+  <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Reference</th><th>Student</th><th>Entry</th><th>Year</th><th>Amount</th><th>Status</th><th>Registered</th><th></th></tr></thead><tbody id="registrationRows"></tbody></table></div>
+  <p id="tableMessage" class="form-message"></p>
+
+  <div class="section-heading admin-heading"><span>03</span><h3>Event configuration</h3></div>
+  <div class="form-panel config-panel">
+    <form id="configForm" class="form-grid">
+      <label>Contribution (₹)<input id="configContribution" type="number" min="0" step="1"></label>
+      <label>Event date<input id="configDate" type="text" placeholder="To be announced"></label>
+      <label class="full">Venue<input id="configVenue" type="text"></label>
+      <label class="full">Support text<input id="configSupport" type="text"></label>
+      <div class="full"><button class="primary-btn" type="submit">Save event configuration</button><span id="configMessage" class="form-message inline-message"></span></div>
+    </form>
+  </div>
+</section>
+
+<div class="modal" id="studentModal" hidden>
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-card">
+    <button class="modal-close" data-close-modal aria-label="Close">×</button>
+    <p class="eyebrow">REGISTRATION</p><h3 id="modalTitle">Student details</h3>
+    <div id="studentDetails" class="detail-grid admin-detail-grid"></div>
+    <div id="proofArea" class="proof-viewer"></div>
+    <div class="modal-actions"><button class="primary-btn" id="verifyBtn">Verify payment</button><button class="danger-btn" id="rejectBtn">Reject payment</button></div>
+    <p id="actionMessage" class="form-message"></p>
+  </div>
+</div>
 </main>
 <script type="module" src="organizer.js"></script>
-</body></html>
+</body>
+</html>
