@@ -1,99 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Freshers'26 — Civil Engineering, Shri Mata Vaishno Devi University">
-  <title>CIVIL '26 — Blueprint to Reality</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Freshers'26 — Civil Engineering, Shri Mata Vaishno Devi University">
+<title>Freshers'26 | Civil Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
-<body class="blueprint-bg">
-  <nav class="site-nav">
-    <a href="#top" class="nav-brand"><div class="nav-icon"><i data-lucide="building-2"></i></div><div><strong>CIVIL<span>.26</span></strong><small>DEPT. OF CIVIL ENGINEERING · SMVDU</small></div></a>
-    <div class="nav-links"><a href="#about">Overview</a><a href="#structural-3d">3D Inspector</a><a href="#domains">Specializations</a><a href="#register">Registration</a><a href="#lookup">Pass</a></div>
-    <a href="#register" class="primary-btn">Join Freshers '26 <span>→</span></a>
-  </nav>
-
-  <main id="top">
-    <section class="hero-3d" id="about">
-      <div id="webgl-container"></div>
-      <div class="hero-overlay">
-        <div class="status-pill"><span></span> CIVIL ENGINEERING · SMVDU · 2026</div>
-        <p class="hero-kicker">BLUEPRINT → REALITY</p>
-        <h1>Designing Infrastructure.<br><em>Structuring the Future.</em></h1>
-        <p class="hero-desc">Welcome to Freshers'26. Step into Civil Engineering — where foundations become structures, ideas become designs, and a new batch begins its journey together.</p>
-        <div class="hero-actions"><a class="primary-btn" href="#register">Register Now <span>↗</span></a><a class="secondary-btn" href="#structural-3d"><i data-lucide="box"></i> Explore 3D Bridge</a></div>
-        <div class="hero-meta"><span><b>01</b> FOUNDATION</span><span><b>02</b> STRUCTURE</span><span><b>03</b> FUTURE</span></div>
-      </div>
-      <div class="viewport-hud"><small>BRIDGE VIEWPORT</small><button id="toggle-wireframe">⌗ Blueprint</button><button id="reset-camera">↻ Reset</button></div>
-      <div class="scroll-cue">SCROLL TO EXPLORE <span>↓</span></div>
-    </section>
-
-    <section class="ticker"><span>STRUCTURE</span><i></i><span>FOUNDATION</span><i></i><span>GEOTECH</span><i></i><span>TRANSPORT</span><i></i><span>WATER</span><i></i><span>CONSTRUCTION</span><i></i><span>FRESHERS'26</span></section>
-
-    <section class="section inspector" id="structural-3d">
-      <div class="section-head"><span>01 / STRUCTURAL LAB</span><div><h2>Interactive Bridge<br><em>Stress Inspector.</em></h2><p>Rotate and inspect the simulated bridge. Adjust the deck load to see the interface react.</p></div></div>
-      <div class="inspector-card">
-        <div class="inspector-copy"><div class="tech-label">SIMULATED FEA ANALYSIS</div><h3>Test the structure.</h3><p>Use the live control to simulate deck loading. This is a visual demonstration, not an engineering safety calculation.</p><label class="range-label"><span>SIMULATED DECK LOAD</span><strong id="load-val">250 kN</strong></label><input type="range" id="load-slider" min="50" max="500" value="250"><div class="metric-box"><div><span>TOWER HEIGHT</span><strong>120 m</strong></div><div><span>MAIN SPAN</span><strong>450 m</strong></div><div><span>TENSION</span><strong id="tension-status">STABLE</strong></div></div></div>
-        <div class="domain-metrics"><article><i data-lucide="mountain"></i><b>Geotechnical</b><small>Soil strata · foundations · slope stability</small><span>GPS 01</span></article><article><i data-lucide="layers"></i><b>Structural</b><small>Concrete · steel · seismic design</small><span>BIM 4D</span></article><article><i data-lucide="droplet"></i><b>Hydraulics</b><small>Water resources · runoff · dams</small><span>ECO</span></article></div>
-      </div>
-    </section>
-
-    <section class="section" id="domains">
-      <div class="center-head"><span>02 / DISCIPLINES</span><h2>Core Civil <em>Specializations.</em></h2><p>The engineering pillars behind the world around us.</p></div>
-      <div class="domain-grid"><article><div class="domain-icon"><i data-lucide="landmark"></i></div><small>01</small><h3>Structural Engineering</h3><p>Skyscrapers, bridges and resilient structural systems.</p></article><article><div class="domain-icon"><i data-lucide="mountain"></i></div><small>02</small><h3>Geotechnical Engineering</h3><p>Soil mechanics, foundations and ground behaviour.</p></article><article><div class="domain-icon"><i data-lucide="navigation"></i></div><small>03</small><h3>Transportation</h3><p>Highways, rail systems and intelligent mobility.</p></article><article><div class="domain-icon"><i data-lucide="hard-hat"></i></div><small>04</small><h3>Construction Technology</h3><p>Project management, BIM and modern construction.</p></article></div>
-    </section>
-
-    <section class="section registration-section" id="register">
-      <div class="section-head"><span>03 / REGISTRATION</span><div><h2>Lay your<br><em>foundation.</em></h2><p>Register once, save your Civil reference ID, then complete payment proof when the contribution is announced.</p></div></div>
-      <div class="construction-panel"><div class="panel-bar"><span>CE-26 / REGISTRATION FORM</span><span>STUDENT DATA</span></div><form id="registrationForm"><div class="form-grid"><label>FULL NAME<input name="full_name" required placeholder="Your full name"></label><label>ENTRY NUMBER<input name="entry_number" required placeholder="25xxx000"></label><label>PHONE NUMBER<input name="phone" required inputmode="tel" pattern="[0-9]{10}" placeholder="10-digit number"></label><label>YEAR<select name="year" required><option value="">Select year</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></label><label class="full">EMAIL<input name="email" type="email" required placeholder="name@example.com"></label></div><div class="amount-box"><div><span>CONTRIBUTION</span><strong id="amountLabel">Amount to be announced</strong></div><small id="amountHint">Civil organizers will set the contribution amount later.</small></div><button class="primary-btn" type="submit">Create Civil Registration <span>↗</span></button><p class="form-message" id="registrationMessage"></p></form></div>
-    </section>
-
-    <section class="section payment-section" id="payment">
-      <div class="section-head"><span>04 / PAYMENT & PROOF</span><div><h2>Build the<br><em>next step.</em></h2><p>Pay through a Civil UPI account and submit the screenshot using your reference ID.</p></div></div>
-      <div class="payment-grid"><div class="construction-panel payment-card"><div class="panel-bar"><span>CIVIL DEPARTMENT UPI</span><span>SCAN / PAY</span></div><div id="qrPlaceholder" class="qr-list"></div><p id="upiText">Choose either Civil UPI account to pay.</p></div><div class="construction-panel payment-card"><div class="panel-bar"><span>PAYMENT PROOF</span><span>MAX 5 MB</span></div><form id="proofForm"><label>REFERENCE ID<input name="reference_id" required placeholder="CIV-26-XXXXXXXX"></label><label>PAYMENT SCREENSHOT<input name="screenshot" type="file" accept="image/png,image/jpeg,image/webp" required></label><button class="primary-btn" type="submit">Submit Payment Proof <span>↗</span></button><p class="form-message" id="proofMessage"></p></form></div></div>
-    </section>
-
-    <section class="section verification-section" id="lookup"><div class="verification-layout"><div><span class="section-tag">05 / VERIFICATION</span><h2>Is your pass<br><em>ready?</em></h2><p>Enter your Civil reference ID to check the latest payment verification status.</p></div><div class="construction-panel lookup-box"><div class="panel-bar"><span>PASS LOOKUP</span><span>LIVE STATUS</span></div><form id="lookupForm"><label>REFERENCE ID<input name="reference_id" required placeholder="CIV-26-XXXXXXXX"></label><button class="primary-btn" type="submit">Check Status <span>↗</span></button></form><div id="lookupResult" class="lookup-result" aria-live="polite"></div></div></div></section>
-
-    <section class="section details"><div class="center-head"><span>06 / PROJECT DATA</span><h2>Freshers'26 <em>Event Details.</em></h2><p>Final event information will appear here when published by the Civil organizers.</p></div><div class="detail-grid"><div><span>DATE</span><strong id="eventDate">To be announced</strong><small>EVENT SCHEDULE</small></div><div><span>VENUE</span><strong id="eventVenue">SMVDU Campus</strong><small>PROJECT LOCATION</small></div><div><span>DEPARTMENT</span><strong>Civil Engineering</strong><small>HOST DEPARTMENT</small></div><div><span>SUPPORT</span><strong id="eventSupport">Contact Civil organizers</strong><small>GET IN TOUCH</small></div></div></section>
-  </main>
-
-  <footer><div><strong>CIVIL<span>.26</span></strong><p>Department of Civil Engineering · Shri Mata Vaishno Devi University</p></div><div class="footer-code">CE / 26<br><small>BLUEPRINT TO REALITY</small></div><a href="organizer.html">Organizer ↗</a></footer>
-  <script src="config.js"></script>
-  <script type="module" src="app.js"></script>
-  <script>
-    lucide.createIcons();
-    const container=document.getElementById('webgl-container');
-    if(container && window.THREE){
-      const scene=new THREE.Scene(); scene.fog=new THREE.FogExp2(0x0b0f19,.012);
-      const camera=new THREE.PerspectiveCamera(50,container.clientWidth/container.clientHeight,.1,1000); camera.position.set(40,25,60);
-      const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true}); renderer.setSize(container.clientWidth,container.clientHeight); renderer.setPixelRatio(Math.min(devicePixelRatio,1.7)); container.appendChild(renderer.domElement);
-      const controls=new THREE.OrbitControls(camera,renderer.domElement); controls.enableDamping=true; controls.dampingFactor=.05; controls.maxPolarAngle=Math.PI/2-.02; controls.minDistance=25; controls.maxDistance=100;
-      scene.add(new THREE.AmbientLight(0xffffff,.65)); const dl=new THREE.DirectionalLight(0x2dd4bf,1.4); dl.position.set(50,80,30); scene.add(dl); const pl=new THREE.PointLight(0x38bdf8,1.4,120); pl.position.set(-30,25,-20); scene.add(pl);
-      const grid=new THREE.GridHelper(200,50,0x14b8a6,0x1e293b); grid.position.y=-5; scene.add(grid);
-      const bridge=new THREE.Group();
-      const steel=new THREE.MeshStandardMaterial({color:0x334155,metalness:.75,roughness:.25}); const concrete=new THREE.MeshStandardMaterial({color:0x64748b,roughness:.85}); const cableMat=new THREE.MeshStandardMaterial({color:0x2dd4bf,emissive:0x0f766e,metalness:.4});
-      const deck=new THREE.Mesh(new THREE.BoxGeometry(100,1.5,12),concrete); bridge.add(deck);
-      function tower(x){const g=new THREE.Group(),pg=new THREE.CylinderGeometry(1.2,1.8,35,12),bg=new THREE.BoxGeometry(1.2,1.5,9);[-4.5,4.5].forEach(z=>{const m=new THREE.Mesh(pg,steel);m.position.set(x,16,z);g.add(m)});[22,10].forEach(y=>{const m=new THREE.Mesh(bg,steel);m.position.set(x,y,0);g.add(m)});return g}
-      bridge.add(tower(-25),tower(25));
-      const cables=[]; function cable(a,b){const d=a.distanceTo(b),m=new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,d,7),cableMat);m.position.copy(a).add(b).multiplyScalar(.5);m.lookAt(b);m.rotateX(Math.PI/2);bridge.add(m);cables.push(m)}
-      for(let x=-45;x<=45;x+=5){const tx=x<0?-25:25;if(Math.abs(x-tx)>2){cable(new THREE.Vector3(tx,32,4.5),new THREE.Vector3(x,.75,4.5));cable(new THREE.Vector3(tx,32,-4.5),new THREE.Vector3(x,.75,-4.5))}}
-      scene.add(bridge); let wire=false;
-      document.getElementById('toggle-wireframe').onclick=()=>{wire=!wire;steel.wireframe=wire;concrete.wireframe=wire;cableMat.wireframe=wire};
-      document.getElementById('reset-camera').onclick=()=>{camera.position.set(40,25,60);controls.target.set(0,8,0);controls.update()};
-      const slider=document.getElementById('load-slider'),loadVal=document.getElementById('load-val'),tension=document.getElementById('tension-status');
-      slider.oninput=()=>{const v=+slider.value;loadVal.textContent=v+' kN';tension.textContent=v<350?'STABLE':v<430?'HIGH LOAD':'CRITICAL LOAD';tension.className=v<350?'stable':v<430?'high':'critical'};
-      controls.target.set(0,8,0);
-      function resize(){const w=container.clientWidth,h=container.clientHeight;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h)} window.addEventListener('resize',resize);
-      function animate(){requestAnimationFrame(animate);bridge.rotation.y+=.0008;controls.update();renderer.render(scene,camera)} animate();
-    }
-  </script>
-</body>
-</html>
+<body>
+<div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+<header class="nav"><a href="#top" class="logo"><span class="logo-mark">CE</span><span><b>CIVIL<span>'26</span></b><small>SMVDU · DEPARTMENT OF CIVIL ENGINEERING</small></span></a><nav><a href="#event">Event</a><a href="#contribution">Contribution</a><a href="#logistics">Logistics</a><a href="#status">Pass</a></nav><a href="#register" class="nav-cta">Register <span>↗</span></a></header>
+<main id="top">
+<section class="hero" id="event"><div class="hero-content"><div class="eyebrow"><span></span> CIVIL ENGINEERING · SMVDU · 2026</div><h1>Freshers'<br><em>26.</em></h1><p class="hero-lead">A new batch. A new foundation. One evening to begin it all.</p><div class="hero-actions"><a class="button" href="#register">Register Now <span>↗</span></a><a class="quiet-link" href="#contribution">Explore event <span>↓</span></a></div></div><div class="hero-art" aria-hidden="true"><div class="circle c1"></div><div class="circle c2"></div><div class="line line-a"></div><div class="line line-b"></div><div class="beam"><i></i><i></i><i></i></div><div class="hero-label">CE / 26<br><small>BLUEPRINT TO REALITY</small></div></div></section>
+<section class="ticker"><span>FRESHERS'26</span><i></i><span>CIVIL ENGINEERING</span><i></i><span>SMVDU</span><i></i><span>NEW BEGINNINGS</span></section>
+<section class="section intro"><div class="section-tag">01 / THE EVENT</div><div><h2>Built around<br><em>the people.</em></h2><p>Freshers'26 is the Civil Engineering department's welcome for the incoming batch — a simple evening of introductions, celebration, music, food and memories.</p></div></section>
+<section class="section event-grid" id="contribution"><article class="feature-card"><span class="card-number">01</span><span class="card-label">CONTRIBUTION</span><h3 id="amountLabel">Amount to be announced</h3><p id="amountHint">The Civil organizers will publish the final contribution amount here.</p><a href="#register">Register →</a></article><article class="feature-card"><span class="card-number">02</span><span class="card-label">DATE</span><h3 id="eventDate">To be announced</h3><p>Freshers'26 event schedule will be updated by the organizers.</p></article><article class="feature-card"><span class="card-number">03</span><span class="card-label">VENUE</span><h3 id="eventVenue">SMVDU Campus</h3><p>The final venue and location details will appear here.</p></article><article class="feature-card"><span class="card-number">04</span><span class="card-label">DEPARTMENT</span><h3>Civil Engineering</h3><p>Shri Mata Vaishno Devi University.</p></article></section>
+<section class="section logistics" id="logistics"><div class="section-tag">02 / LOGISTICS</div><div class="logistics-content"><div><h2>Everything<br><em>you need.</em></h2><p>Keep your reference ID safe after registration. It is used for payment proof and pass verification.</p></div><div class="logistics-list"><div><span>01</span><b>Registration</b><small>Enter your student details and receive a unique Civil reference ID.</small></div><div><span>02</span><b>Contribution</b><small>Pay through either official Civil UPI account shown below.</small></div><div><span>03</span><b>Payment proof</b><small>Upload a clear screenshot against your reference ID.</small></div><div><span>04</span><b>Verification</b><small>Organizers verify the payment and your pass becomes ready.</small></div></div></div></section>
+<section class="section payment" id="register"><div class="section-tag">03 / REGISTER</div><div class="register-wrap"><div><h2>Save your<br><em>spot.</em></h2><p>Register first. You will receive your Civil reference ID immediately.</p></div><div class="form-card"><form id="registrationForm"><div class="form-grid"><label>FULL NAME<input name="full_name" required placeholder="Your full name"></label><label>ENTRY NUMBER<input name="entry_number" required placeholder="25xxx000"></label><label>PHONE NUMBER<input name="phone" required inputmode="tel" pattern="[0-9]{10}" placeholder="10-digit number"></label><label>YEAR<select name="year" required><option value="">Select year</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></label><label class="full">EMAIL<input name="email" type="email" required placeholder="name@example.com"></label></div><div class="amount-row"><span>CONTRIBUTION</span><strong id="formAmount">Amount to be announced</strong></div><button class="button" type="submit">Create Registration <span>↗</span></button><p class="form-message" id="registrationMessage"></p></form></div></div></section>
+<section class="section payment-proof" id="payment"><div class="section-tag">04 / PAYMENT</div><div class="two-col"><div><h2>Make the<br><em>contribution.</em></h2><p>Use either official Civil UPI account. After payment, upload the screenshot with your reference ID.</p><div id="qrPlaceholder" class="qr-list"></div><p id="upiText" class="muted-note">Choose either Civil UPI account to pay.</p></div><div class="form-card"><div class="mini-heading">PAYMENT PROOF <span>MAX 5 MB</span></div><form id="proofForm"><label>REFERENCE ID<input name="reference_id" required placeholder="CIV-26-XXXXXXXX"></label><label>PAYMENT SCREENSHOT<input name="screenshot" type="file" accept="image/png,image/jpeg,image/webp" required></label><button class="button" type="submit">Submit Proof <span>↗</span></button><p class="form-message" id="proofMessage"></p></form></div></div></section>
+<section class="section status" id="status"><div class="status-wrap"><div><div class="section-tag">05 / PASS</div><h2>Check your<br><em>status.</em></h2><p>Enter your Civil reference ID to see the latest verification status.</p></div><div class="form-card"><div class="mini-heading">PASS LOOKUP <span>LIVE</span></div><form id="lookupForm"><label>REFERENCE ID<input name="reference_id" required placeholder="CIV-26-XXXXXXXX"></label><button class="button" type="submit">Check Status <span>↗</span></button></form><div id="lookupResult" class="lookup-result"></div></div></div></section>
+<section class="section final-details"><div class="section-tag">06 / EVENT DETAILS</div><div class="detail-row"><div><span>DATE</span><b id="eventDateBottom">To be announced</b></div><div><span>VENUE</span><b id="eventVenueBottom">SMVDU Campus</b></div><div><span>SUPPORT</span><b id="eventSupport">Contact Civil organizers</b></div></div></section>
+</main>
+<footer><div><strong>CIVIL<span>'26</span></strong><p>Department of Civil Engineering · Shri Mata Vaishno Devi University</p></div><a href="organizer.html">Organizer ↗</a></footer>
+<script src="config.js"></script><script type="module" src="app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{const reveal=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.section,.feature-card,.logistics-list>div').forEach(e=>{e.classList.add('reveal');reveal.observe(e)});});
+</script>
+</body></html>
