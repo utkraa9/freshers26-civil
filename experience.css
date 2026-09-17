@@ -97,3 +97,6 @@
   .event-grid .feature-card h3{font-size:18px}
   .event-grid .card-number{font-size:10px}
 }
+
+/* final cleanup */
+.simple-steps{display:none!important}
