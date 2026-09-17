@@ -494,3 +494,87 @@ body:has(.cinematic-hero) footer{
     padding:30px 18px;
   }
 }
+
+
+/* Hero animation placed UNDER the Freshers'26 heading */
+@media(max-width:900px){
+  body:has(.cinematic-hero) .cinematic-hero{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+  }
+  body:has(.cinematic-hero) .hero-content{
+    display:flex;
+    flex-direction:column;
+  }
+  body:has(.cinematic-hero) .hero-art{
+    order:2!important;
+    height:230px;
+    margin-top:12px;
+    margin-bottom:0;
+  }
+  body:has(.cinematic-hero) .hero-actions{
+    order:1;
+  }
+  body:has(.cinematic-hero) .hero-content .hero-kicker,
+  body:has(.cinematic-hero) .hero-content h1{
+    order:0;
+  }
+  body:has(.cinematic-hero) .hero-art .freshers-art{
+    max-height:230px;
+  }
+}
+
+/* QR codes side-by-side on mobile and desktop */
+body:has(.cinematic-hero) .payment-proof .qr-list{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:100%;
+  gap:16px;
+}
+body:has(.cinematic-hero) .payment-proof .upi-card{
+  min-width:0;
+  padding:14px 10px;
+}
+body:has(.cinematic-hero) .payment-proof .qr-image{
+  width:min(100%,170px);
+}
+@media(max-width:600px){
+  body:has(.cinematic-hero) .payment-proof .qr-list{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px;
+    overflow:visible;
+  }
+  body:has(.cinematic-hero) .payment-proof .upi-card{
+    padding:12px 7px;
+    border-radius:14px;
+  }
+  body:has(.cinematic-hero) .payment-proof .qr-image{
+    width:100%;
+    max-width:145px;
+  }
+  body:has(.cinematic-hero) .payment-proof .upi-card strong{
+    font-size:10px;
+  }
+  body:has(.cinematic-hero) .payment-proof .upi-card span{
+    font-size:8px;
+  }
+}
+
+/* Keep hero art below the title at every viewport */
+@media(min-width:901px){
+  body:has(.cinematic-hero) .cinematic-hero{
+    grid-template-columns:1fr;
+    min-height:auto;
+    padding-top:120px;
+    padding-bottom:70px;
+  }
+  body:has(.cinematic-hero) .hero-content{
+    max-width:850px;
+  }
+  body:has(.cinematic-hero) .hero-art{
+    width:min(760px,100%);
+    height:360px;
+    margin:0 auto;
+  }
+}
