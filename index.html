@@ -143,6 +143,12 @@
   </div>
 </section>
 
+<div class="event-tabs" aria-label="Event details">
+  <button type="button" class="event-tab active" data-card="0">Contribution</button>
+  <button type="button" class="event-tab" data-card="1">Date</button>
+  <button type="button" class="event-tab" data-card="2">Venue</button>
+  <button type="button" class="event-tab" data-card="3">Department</button>
+</div>
 <section class="section event-grid" id="contribution">
   <article class="feature-card"><span class="card-number">01</span><span class="card-label">CONTRIBUTION</span><h3 id="amountLabel">JR ₹700 · SR ₹1,400</h3><p id="amountHint">Junior ₹700 · Senior ₹1,400</p><a href="#register">Register →</a></article>
   <article class="feature-card"><span class="card-number">02</span><span class="card-label">DATE</span><h3 id="eventDate">To be announced</h3><p>Event date will be updated here.</p></article>
@@ -162,6 +168,22 @@
 <script type="module" src="app.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
+
+  const eventGrid=document.querySelector('.event-grid');
+  const eventTabs=document.querySelectorAll('.event-tab');
+  if(eventGrid && eventTabs.length){
+    const eventCards=eventGrid.querySelectorAll('.feature-card');
+    eventCards[0]?.classList.add('stack-active');
+    eventTabs.forEach((tab,index)=>{
+      tab.addEventListener('click',()=>{
+        eventTabs.forEach(t=>t.classList.remove('active'));
+        eventCards.forEach(card=>card.classList.remove('stack-active'));
+        tab.classList.add('active');
+        eventCards[index]?.classList.add('stack-active');
+      });
+    });
+  }
+
   const reveal=new IntersectionObserver(entries=>entries.forEach(entry=>{
     if(entry.isIntersecting) entry.target.classList.add('visible');
   }),{threshold:.12});
