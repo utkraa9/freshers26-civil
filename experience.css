@@ -578,3 +578,58 @@ body:has(.cinematic-hero) .payment-proof .qr-image{
     margin:0 auto;
   }
 }
+
+
+/* UPI QR carousel — one QR visible at a time, swipe horizontally */
+body:has(.cinematic-hero) .payment-proof .qr-list{
+  display:flex!important;
+  flex-wrap:nowrap;
+  width:min(100%,430px);
+  margin:25px 0 0;
+  padding:0 0 10px;
+  gap:14px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(214,83,47,.55) transparent;
+}
+body:has(.cinematic-hero) .payment-proof .qr-list::-webkit-scrollbar{
+  height:5px;
+}
+body:has(.cinematic-hero) .payment-proof .qr-list::-webkit-scrollbar-track{
+  background:rgba(255,255,255,.08);
+  border-radius:10px;
+}
+body:has(.cinematic-hero) .payment-proof .qr-list::-webkit-scrollbar-thumb{
+  background:rgba(214,83,47,.7);
+  border-radius:10px;
+}
+body:has(.cinematic-hero) .payment-proof .upi-card{
+  flex:0 0 100%;
+  width:100%;
+  min-width:100%;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  box-sizing:border-box;
+}
+body:has(.cinematic-hero) .payment-proof .qr-image{
+  width:min(100%,280px);
+  max-width:280px;
+}
+@media(max-width:600px){
+  body:has(.cinematic-hero) .payment-proof .qr-list{
+    width:100%;
+    max-width:430px;
+    padding-bottom:9px;
+  }
+  body:has(.cinematic-hero) .payment-proof .upi-card{
+    flex-basis:100%;
+    min-width:100%;
+  }
+  body:has(.cinematic-hero) .payment-proof .qr-image{
+    width:min(72vw,280px);
+    max-width:280px;
+  }
+}
