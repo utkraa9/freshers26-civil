@@ -26,16 +26,29 @@
 </section>
 
 <section class="section" id="dashboard" hidden>
-  <div class="dashboard-head">
-    <div><p class="eyebrow">CIVIL / FRESHERS'26</p><h2>Registration control room</h2></div>
+  <div class="dashboard-head overview-head">
+    <div><p class="eyebrow">CIVIL / FRESHERS'26</p><h2>Overview</h2><p class="overview-subtitle">Live organizer dashboard for Freshers'26.</p></div>
     <button class="outline-btn" id="logoutBtn">Sign out</button>
   </div>
 
-  <div class="admin-stats">
-    <article><span>Total</span><strong id="statTotal">0</strong></article>
-    <article><span>Pending proof</span><strong id="statPending">0</strong></article>
+  <div class="overview-stats">
+    <article><span>Registrations</span><strong id="statTotal">0</strong></article>
     <article><span>Verified</span><strong id="statVerified">0</strong></article>
-    <article><span>Rejected</span><strong id="statRejected">0</strong></article>
+    <article><span>Collected</span><strong id="statCollected">₹0</strong></article>
+    <article><span>Pending amount</span><strong id="statPendingAmount">₹0</strong></article>
+  </div>
+
+  <div class="collection-summary">
+    <h3>Collection summary</h3>
+    <div class="summary-row"><span>Seniors</span><strong id="summarySeniors">0</strong></div>
+    <div class="summary-row"><span>Juniors</span><strong id="summaryJuniors">0</strong></div>
+    <div class="summary-row"><span>Payments pending</span><strong id="summaryPending">0</strong></div>
+    <div class="summary-row"><span>Rejected</span><strong id="summaryRejected">0</strong></div>
+  </div>
+
+  <div class="dashboard-control-heading">
+    <p class="eyebrow">REGISTRATIONS</p>
+    <h3>Registration control room</h3>
   </div>
 
   <div class="admin-toolbar">
