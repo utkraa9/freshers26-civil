@@ -633,3 +633,51 @@ body:has(.cinematic-hero) .payment-proof .qr-image{
     max-width:280px;
   }
 }
+
+
+/* FINAL MOBILE OVERFLOW FIX */
+html, body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+}
+body:has(.cinematic-hero) main,
+body:has(.cinematic-hero) .section,
+body:has(.cinematic-hero) .hero,
+body:has(.cinematic-hero) .register-wrap,
+body:has(.cinematic-hero) .two-col,
+body:has(.cinematic-hero) .status-wrap{
+  max-width:100%;
+  min-width:0;
+}
+body:has(.cinematic-hero) .section > *,
+body:has(.cinematic-hero) .hero-content,
+body:has(.cinematic-hero) .register-wrap > *,
+body:has(.cinematic-hero) .two-col > *,
+body:has(.cinematic-hero) .status-wrap > *{
+  min-width:0;
+}
+body:has(.cinematic-hero) .payment-proof{
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
+}
+body:has(.cinematic-hero) .event-grid{
+  box-sizing:border-box;
+  max-width:100%;
+}
+body:has(.cinematic-hero) .hero-art,
+body:has(.cinematic-hero) .freshers-art{
+  max-width:100%;
+}
+@media(max-width:600px){
+  body:has(.cinematic-hero) .payment-proof .qr-list{
+    width:100%;
+    max-width:100%;
+  }
+  body:has(.cinematic-hero) .payment-proof .upi-card{
+    flex:0 0 100%;
+    min-width:100%;
+    max-width:100%;
+  }
+}
