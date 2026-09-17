@@ -2,34 +2,128 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 import './config.js';
 
 const cfg = window.CIVIL_CONFIG || {};
-const loginSection = document.querySelector('#loginSection');
-const dashboard = document.querySelector('#dashboard');
-const loginMessage = document.querySelector('#loginMessage');
-const tableWrap = document.querySelector('#tableWrap');
-
-if (!cfg.supabaseUrl || !cfg.supabaseAnonKey) {
-  loginMessage.textContent = 'Configure the NEW Civil Supabase URL and anon key in config.js first.';
-}
 const supabase = createClient(cfg.supabaseUrl || 'https://placeholder.invalid', cfg.supabaseAnonKey || 'placeholder');
+const $ = (s) => document.querySelector(s);
+let registrations = [];
+let selected = null;
 
-function msg(text, error=false){ loginMessage.textContent=text; loginMessage.style.color=error?'#ff9c9c':''; }
+const loginSection = $('#loginSection'), dashboard = $('#dashboard');
+const loginMessage = $('#loginMessage'), tableMessage = $('#tableMessage');
 
-async function loadDashboard(){
-  const {data, error} = await supabase.from('registrations').select('*').order('created_at',{ascending:false});
-  if(error){ tableWrap.textContent=error.message; return; }
-  tableWrap.innerHTML = `<table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr><th>Reference</th><th>Name</th><th>Entry</th><th>Phone</th><th>Year</th><th>Amount</th><th>Status</th><th>Created</th></tr></thead><tbody>${data.map(r=>`<tr><td>${r.reference_id}</td><td>${r.full_name}</td><td>${r.entry_number}</td><td>${r.phone}</td><td>${r.year}</td><td>₹${r.contribution||0}</td><td>${r.payment_status}</td><td>${new Date(r.created_at).toLocaleString()}</td></tr>`).join('')}</tbody></table>`;
+function message(el, text, error=false) { el.textContent = text; el.classList.toggle('error-message', error); }
+function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function statusLabel(s) { return s === 'submitted' ? 'Proof submitted' : s === 'verified' ? 'Verified' : s === 'rejected' ? 'Rejected' : 'Pending'; }
+
+async function loadConfig() {
+  const { data, error } = await supabase.from('event_config').select('*').eq('id', true).maybeSingle();
+  if (error || !data) return;
+  $('#configContribution').value = data.contribution ?? 0;
+  $('#configDate').value = data.event_date ?? '';
+  $('#configVenue').value = data.venue ?? '';
+  $('#configSupport').value = data.support_text ?? '';
 }
 
-async function checkSession(){
-  const {data:{session}}=await supabase.auth.getSession();
-  if(session){loginSection.hidden=true;dashboard.hidden=false;await loadDashboard();}
+function renderStats() {
+  $('#statTotal').textContent = registrations.length;
+  $('#statPending').textContent = registrations.filter(r => r.payment_status === 'submitted').length;
+  $('#statVerified').textContent = registrations.filter(r => r.payment_status === 'verified').length;
+  $('#statRejected').textContent = registrations.filter(r => r.payment_status === 'rejected').length;
 }
 
-document.querySelector('#loginForm').addEventListener('submit',async e=>{
- e.preventDefault(); const d=Object.fromEntries(new FormData(e.currentTarget));
- const {error}=await supabase.auth.signInWithPassword({email:d.email,password:d.password});
- if(error){msg(error.message,true);return;} loginSection.hidden=true;dashboard.hidden=false;await loadDashboard();
+function renderRows() {
+  const q = $('#searchInput').value.trim().toLowerCase();
+  const filter = $('#statusFilter').value;
+  const rows = registrations.filter(r => {
+    const hay = `${r.reference_id} ${r.full_name} ${r.entry_number} ${r.phone} ${r.email}`.toLowerCase();
+    return (!q || hay.includes(q)) && (filter === 'all' || r.payment_status === filter);
+  });
+  $('#registrationRows').innerHTML = rows.length ? rows.map(r => `<tr>
+    <td><strong>${esc(r.reference_id)}</strong></td>
+    <td><strong>${esc(r.full_name)}</strong><small>${esc(r.email)}</small></td>
+    <td>${esc(r.entry_number)}</td><td>${esc(r.year)}</td><td>₹${esc(r.contribution ?? 0)}</td>
+    <td><span class="status status-${esc(r.payment_status)}">${esc(statusLabel(r.payment_status))}</span></td>
+    <td>${new Date(r.created_at).toLocaleString()}</td>
+    <td><button class="mini-btn" data-open="${esc(r.reference_id)}">Open</button></td>
+  </tr>`).join('') : `<tr><td colspan="8" class="empty-row">No registrations match this filter.</td></tr>`;
+  document.querySelectorAll('[data-open]').forEach(b => b.addEventListener('click', () => openStudent(b.dataset.open)));
+}
+
+async function loadRegistrations() {
+  message(tableMessage, 'Loading registrations…');
+  const { data, error } = await supabase.from('registrations').select('*').order('created_at', { ascending: false });
+  if (error) { message(tableMessage, error.message, true); return; }
+  registrations = data || [];
+  renderStats(); renderRows(); message(tableMessage, `${registrations.length} registration${registrations.length === 1 ? '' : 's'} loaded.`);
+}
+
+async function openStudent(reference) {
+  selected = registrations.find(r => r.reference_id === reference);
+  if (!selected) return;
+  $('#modalTitle').textContent = selected.full_name;
+  $('#studentDetails').innerHTML = [
+    ['Reference', selected.reference_id], ['Entry number', selected.entry_number], ['Phone', selected.phone], ['Email', selected.email],
+    ['Year', selected.year], ['Contribution', `₹${selected.contribution ?? 0}`], ['Payment', statusLabel(selected.payment_status)], ['Registered', new Date(selected.created_at).toLocaleString()]
+  ].map(([k,v]) => `<div><span>${esc(k)}</span><strong>${esc(v)}</strong></div>`).join('');
+  $('#actionMessage').textContent = '';
+  $('#verifyBtn').disabled = selected.payment_status === 'verified';
+  $('#rejectBtn').disabled = selected.payment_status === 'rejected';
+  $('#proofArea').innerHTML = '<p class="muted">Loading latest payment proof…</p>';
+  $('#studentModal').hidden = false;
+
+  const { data: proofs, error } = await supabase.from('payment_proofs').select('*').eq('reference_id', reference).order('submitted_at', { ascending: false }).limit(1);
+  if (error || !proofs?.length) {
+    $('#proofArea').innerHTML = '<div class="proof-empty">No payment proof has been uploaded yet.</div>';
+    return;
+  }
+  const proof = proofs[0];
+  const { data: publicUrl } = supabase.storage.from('civil-payment-proofs').getPublicUrl(proof.storage_path);
+  $('#proofArea').innerHTML = `<div class="proof-head"><span>Latest payment proof</span><a href="${esc(publicUrl.publicUrl)}" target="_blank" rel="noopener">Open full image ↗</a></div><img class="proof-image" src="${esc(publicUrl.publicUrl)}" alt="Payment proof for ${esc(reference)}">`;
+}
+
+async function setPaymentStatus(status) {
+  if (!selected) return;
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) { message($('#actionMessage'), 'Session expired. Please sign in again.', true); return; }
+  const now = new Date().toISOString();
+  const { error: regError } = await supabase.from('registrations').update({ payment_status: status }).eq('reference_id', selected.reference_id);
+  if (regError) { message($('#actionMessage'), regError.message, true); return; }
+  const { data: proof } = await supabase.from('payment_proofs').select('id').eq('reference_id', selected.reference_id).order('submitted_at', { ascending: false }).limit(1).maybeSingle();
+  if (proof) await supabase.from('payment_proofs').update({ status, reviewed_at: now, reviewed_by: user.id }).eq('id', proof.id);
+  selected.payment_status = status;
+  const local = registrations.find(r => r.reference_id === selected.reference_id); if (local) local.payment_status = status;
+  renderStats(); renderRows();
+  $('#verifyBtn').disabled = status === 'verified'; $('#rejectBtn').disabled = status === 'rejected';
+  message($('#actionMessage'), status === 'verified' ? 'Payment verified. Pass is now ready.' : 'Payment marked as rejected.');
+}
+
+$('#loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(e.currentTarget));
+  message(loginMessage, 'Signing in…');
+  const { error } = await supabase.auth.signInWithPassword({ email: d.email, password: d.password });
+  if (error) { message(loginMessage, error.message, true); return; }
+  loginSection.hidden = true; dashboard.hidden = false;
+  await Promise.all([loadRegistrations(), loadConfig()]);
 });
-document.querySelector('#refreshBtn').addEventListener('click',loadDashboard);
-document.querySelector('#logoutBtn').addEventListener('click',async()=>{await supabase.auth.signOut();dashboard.hidden=true;loginSection.hidden=false;});
+
+$('#refreshBtn').addEventListener('click', loadRegistrations);
+$('#searchInput').addEventListener('input', renderRows);
+$('#statusFilter').addEventListener('change', renderRows);
+$('#verifyBtn').addEventListener('click', () => setPaymentStatus('verified'));
+$('#rejectBtn').addEventListener('click', () => setPaymentStatus('rejected'));
+$('#logoutBtn').addEventListener('click', async () => { await supabase.auth.signOut(); dashboard.hidden = true; loginSection.hidden = false; });
+document.querySelectorAll('[data-close-modal]').forEach(el => el.addEventListener('click', () => { $('#studentModal').hidden = true; }));
+
+$('#configForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const payload = { id: true, contribution: Number($('#configContribution').value || 0), event_date: $('#configDate').value.trim() || 'To be announced', venue: $('#configVenue').value.trim() || 'SMVDU Campus', support_text: $('#configSupport').value.trim() || 'Contact Civil organizers' };
+  const { error } = await supabase.from('event_config').update(payload).eq('id', true);
+  message($('#configMessage'), error ? error.message : 'Event configuration saved.', !!error);
+});
+
+async function checkSession() {
+  if (!cfg.supabaseUrl || !cfg.supabaseAnonKey) { message(loginMessage, 'Configure Civil Supabase in config.js first.', true); return; }
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session) { loginSection.hidden = true; dashboard.hidden = false; await Promise.all([loadRegistrations(), loadConfig()]); }
+}
 checkSession();
