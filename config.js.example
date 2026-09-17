@@ -1,0 +1,6 @@
+// Copy this to config.js for local testing, or inject equivalent values in your deployment.
+// DO NOT use the M&C Supabase project here.
+window.CIVIL_SUPABASE_URL = 'https://YOUR-CIVIL-PROJECT.supabase.co';
+window.CIVIL_SUPABASE_ANON_KEY = 'YOUR-CIVIL-ANON-KEY';
+window.CIVIL_UPI_ID = 'YOUR-CIVIL-UPI@BANK';
+window.CIVIL_CONTRIBUTION = 'YOUR_AMOUNT';
