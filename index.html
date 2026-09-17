@@ -19,7 +19,7 @@
     <span class="brand-divider"></span>
     <span class="civil-wordmark"><b>FRESHERS<span>'26</span></b><small>CONTRIBUTION</small></span>
   </a>
-  <nav><a href="#event">Event</a><a href="#contribution">Contribution</a><a href="#register">Register</a><a href="#status">Pass</a></nav>
+  <nav><a href="#event">Event</a><a href="#contribution">Details</a><a href="#register">Register</a><a href="#status">Pass</a></nav>
   <a href="#register" class="nav-cta">Register <span>↗</span></a>
 </header>
 
@@ -64,29 +64,7 @@
   </div>
 </section>
 
-<section class="section event-grid" id="contribution">
-  <article class="feature-card">
-    <span class="card-number">01</span><span class="card-label">CONTRIBUTION</span>
-    <h3 id="amountLabel">Amount to be announced</h3>
-    <p id="amountHint">The organizers will publish the final contribution amount here.</p>
-    <a href="#register">Register →</a>
-  </article>
-  <article class="feature-card">
-    <span class="card-number">02</span><span class="card-label">DATE</span>
-    <h3 id="eventDate">To be announced</h3>
-    <p>Event date will be updated here.</p>
-  </article>
-  <article class="feature-card">
-    <span class="card-number">03</span><span class="card-label">VENUE</span>
-    <h3 id="eventVenue">SMVDU Campus</h3>
-    <p>Final venue details will be updated here.</p>
-  </article>
-  <article class="feature-card">
-    <span class="card-number">04</span><span class="card-label">DEPARTMENT</span>
-    <h3>Civil Engineering</h3>
-    <p>Shri Mata Vaishno Devi University.</p>
-  </article>
-</section>
+
 
 <section class="section simple-steps">
   <div class="section-tag">02 / HOW IT WORKS</div>
@@ -111,7 +89,7 @@
           <label>YEAR<select name="year" required><option value="">Select year</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></label>
           <label class="full">EMAIL<input name="email" type="email" required placeholder="name@example.com"></label>
         </div>
-        <div class="amount-row"><span>CONTRIBUTION</span><strong id="formAmount">Amount to be announced</strong></div>
+        <div class="amount-row"><span>CONTRIBUTION</span><strong id="formAmount">Select year</strong></div>
         <button class="button" type="submit">Create Registration <span>↗</span></button>
         <p class="form-message" id="registrationMessage"></p>
       </form>
@@ -151,11 +129,18 @@
   </div>
 </section>
 
+<section class="section event-grid" id="contribution">
+  <article class="feature-card"><span class="card-number">01</span><span class="card-label">CONTRIBUTION</span><h3 id="amountLabel">JR ₹700 · SR ₹1,400</h3><p id="amountHint">Junior ₹700 · Senior ₹1,400</p><a href="#register">Register →</a></article>
+  <article class="feature-card"><span class="card-number">02</span><span class="card-label">DATE</span><h3 id="eventDate">To be announced</h3><p>Event date will be updated here.</p></article>
+  <article class="feature-card"><span class="card-number">03</span><span class="card-label">VENUE</span><h3 id="eventVenue">Sanjeevni Resort</h3><p>Final event venue.</p></article>
+  <article class="feature-card"><span class="card-number">04</span><span class="card-label">DEPARTMENT</span><h3>Civil Engineering</h3><p>Shri Mata Vaishno Devi University.</p></article>
+</section>
+
 <section class="section final-details">
   <div class="section-tag">06 / DETAILS</div>
   <div class="detail-row">
     <div><span>DATE</span><b id="eventDateBottom">To be announced</b></div>
-    <div><span>VENUE</span><b id="eventVenueBottom">SMVDU Campus</b></div>
+    <div><span>VENUE</span><b id="eventVenueBottom">Sanjeevni Resort</b></div>
     <div><span>SUPPORT</span><b id="eventSupport">Contact Civil organizers</b></div>
   </div>
 </section>
