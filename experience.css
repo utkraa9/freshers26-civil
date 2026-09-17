@@ -100,3 +100,397 @@
 
 /* final cleanup */
 .simple-steps{display:none!important}
+
+
+/* =========================================================
+   FRESHERS'26 — NEW EVENT-FIRST DESIGN
+   Homepage only; organizer/dashboard styling remains intact.
+   ========================================================= */
+
+body:has(.cinematic-hero){
+  --bg:#f3efe7;
+  --surface:#fffdf8;
+  --ink:#151515;
+  --muted:#696862;
+  --line:rgba(21,21,21,.14);
+  --accent:#d6532f;
+  --accent-soft:#f28a5e;
+  background:
+    radial-gradient(circle at 88% 8%, rgba(214,83,47,.10), transparent 24rem),
+    linear-gradient(180deg,#f7f3eb 0%,#f3efe7 48%,#eee8dc 100%);
+}
+
+/* cleaner, more youthful navigation */
+body:has(.cinematic-hero) .nav{
+  height:72px;
+  padding:10px clamp(16px,4vw,54px);
+  background:rgba(247,243,235,.82);
+  border-bottom:1px solid rgba(21,21,21,.10);
+  box-shadow:none;
+}
+body:has(.cinematic-hero) .civil-wordmark b{
+  font-size:18px;
+  letter-spacing:-.02em;
+}
+body:has(.cinematic-hero) .nav nav{
+  gap:25px;
+}
+body:has(.cinematic-hero) .nav nav a{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.10em;
+}
+body:has(.cinematic-hero) .nav-cta{
+  border-radius:999px!important;
+  padding:11px 17px;
+}
+
+/* hero becomes an event poster rather than a corporate landing page */
+body:has(.cinematic-hero) .cinematic-hero{
+  max-width:1280px;
+  min-height:calc(100vh - 72px);
+  padding:105px clamp(18px,5vw,70px) 55px;
+  grid-template-columns:1fr .85fr;
+  gap:20px;
+  isolation:isolate;
+}
+body:has(.cinematic-hero) .cinematic-hero:before{
+  content:"26";
+  position:absolute;
+  z-index:-1;
+  right:1%;
+  top:6%;
+  font:800 clamp(260px,35vw,540px)/.8 'Space Grotesk';
+  letter-spacing:-.10em;
+  color:rgba(21,21,21,.035);
+  pointer-events:none;
+}
+body:has(.cinematic-hero) .cinematic-hero:after{
+  content:"";
+  position:absolute;
+  left:5%;
+  right:5%;
+  bottom:28px;
+  height:1px;
+  background:var(--line);
+}
+body:has(.cinematic-hero) .hero-content{
+  align-self:center;
+  max-width:650px;
+}
+body:has(.cinematic-hero) .eyebrow{
+  padding:8px 12px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(255,253,248,.7);
+  font-size:9px;
+  letter-spacing:.15em;
+}
+body:has(.cinematic-hero) .hero-kicker{
+  margin-top:28px;
+  font-size:10px;
+  letter-spacing:.20em;
+  color:var(--accent);
+}
+body:has(.cinematic-hero) .hero h1{
+  font-size:clamp(72px,10.5vw,150px);
+  line-height:.84;
+  letter-spacing:-.065em;
+  margin:18px 0 30px;
+}
+body:has(.cinematic-hero) .hero h1 em{
+  display:inline-block;
+  color:var(--accent);
+  transform:translateX(18px);
+}
+body:has(.cinematic-hero) .hero-actions .button{
+  border-radius:999px!important;
+  padding:15px 22px;
+  font-size:12px;
+  box-shadow:0 12px 25px rgba(21,21,21,.12);
+}
+body:has(.cinematic-hero) .hero-art{
+  height:530px;
+  align-self:center;
+  display:grid;
+  place-items:center;
+}
+body:has(.cinematic-hero) .freshers-art{
+  width:min(100%,620px);
+  filter:drop-shadow(0 18px 20px rgba(21,21,21,.04));
+}
+body:has(.cinematic-hero) .freshers-art .art-block rect{
+  rx:9;
+}
+body:has(.cinematic-hero) .freshers-art .art-block text{
+  font-size:14px;
+  letter-spacing:.06em;
+}
+body:has(.cinematic-hero) .hero-label{
+  right:3%;
+  bottom:2%;
+  padding:9px 13px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(255,253,248,.72);
+}
+
+/* sections feel like a real event microsite */
+body:has(.cinematic-hero) .section{
+  max-width:1180px;
+  padding:90px 24px;
+}
+body:has(.cinematic-hero) .section-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(214,83,47,.08);
+  color:var(--accent)!important;
+  font-size:9px;
+  letter-spacing:.15em;
+}
+body:has(.cinematic-hero) .intro{
+  grid-template-columns:190px 1fr;
+  align-items:start;
+}
+body:has(.cinematic-hero) .intro h2,
+body:has(.cinematic-hero) .register-wrap h2,
+body:has(.cinematic-hero) .two-col h2,
+body:has(.cinematic-hero) .status-wrap h2{
+  font-size:clamp(43px,6vw,76px);
+  line-height:.95;
+  letter-spacing:-.055em;
+}
+body:has(.cinematic-hero) .intro p,
+body:has(.cinematic-hero) .register-wrap>div>p,
+body:has(.cinematic-hero) .two-col>div>p,
+body:has(.cinematic-hero) .status-wrap>div>p{
+  max-width:570px;
+  font-size:15px;
+  line-height:1.8;
+}
+
+/* event information becomes bold mini tickets */
+body:has(.cinematic-hero) .event-grid{
+  max-width:1132px;
+  margin:0 auto;
+  padding:0 24px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  background:transparent;
+  border:0;
+}
+body:has(.cinematic-hero) .event-grid .feature-card{
+  min-height:185px;
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(255,253,248,.75);
+  box-shadow:none;
+  overflow:hidden;
+}
+body:has(.cinematic-hero) .event-grid .feature-card:nth-child(1){
+  background:var(--ink);
+  color:#fff;
+  border-color:var(--ink);
+}
+body:has(.cinematic-hero) .event-grid .feature-card:nth-child(1) h3,
+body:has(.cinematic-hero) .event-grid .feature-card:nth-child(1) p,
+body:has(.cinematic-hero) .event-grid .feature-card:nth-child(1) a{
+  color:#fff;
+}
+body:has(.cinematic-hero) .event-grid .feature-card h3{
+  font-size:22px;
+  margin:42px 0 8px;
+  letter-spacing:-.035em;
+}
+body:has(.cinematic-hero) .event-grid .feature-card p{
+  min-height:0;
+  margin-bottom:18px;
+}
+body:has(.cinematic-hero) .event-grid .card-number{
+  color:var(--accent);
+}
+
+/* forms: softer, more premium and less like an admin dashboard */
+body:has(.cinematic-hero) .form-card{
+  border:1px solid rgba(21,21,21,.12);
+  border-radius:20px;
+  padding:28px;
+  background:rgba(255,253,248,.88);
+  box-shadow:0 20px 60px rgba(55,45,30,.07);
+}
+body:has(.cinematic-hero) .form-card:before{
+  width:70px;
+  height:3px;
+  border-radius:0 0 3px 0;
+}
+body:has(.cinematic-hero) .form-card input,
+body:has(.cinematic-hero) .form-card select{
+  border-radius:11px;
+  padding:14px 15px;
+  background:#f6f2ea;
+}
+body:has(.cinematic-hero) .form-card input:focus,
+body:has(.cinematic-hero) .form-card select:focus{
+  background:#fffdf8;
+}
+body:has(.cinematic-hero) .button{
+  border-radius:12px!important;
+  min-height:48px;
+}
+body:has(.cinematic-hero) .amount-row{
+  border-radius:12px;
+  padding:16px 17px;
+}
+
+/* contribution section gets a stronger visual break */
+body:has(.cinematic-hero) .payment-proof{
+  max-width:100%;
+  margin-top:35px;
+  padding-left:max(24px,calc((100vw - 1132px)/2));
+  padding-right:max(24px,calc((100vw - 1132px)/2));
+  background:var(--ink);
+  color:#fff;
+}
+body:has(.cinematic-hero) .payment-proof h2,
+body:has(.cinematic-hero) .payment-proof .section-tag{
+  color:#fff!important;
+}
+body:has(.cinematic-hero) .payment-proof h2 em{
+  color:var(--accent-soft);
+}
+body:has(.cinematic-hero) .payment-proof>div>p{
+  color:rgba(255,255,255,.65);
+}
+body:has(.cinematic-hero) .payment-proof .form-card{
+  background:#fffdf8;
+  color:var(--ink);
+}
+body:has(.cinematic-hero) .payment-proof .qr-list{
+  max-width:390px;
+}
+body:has(.cinematic-hero) .payment-proof .upi-card{
+  border-radius:15px;
+}
+
+/* pass lookup gets a compact "ticket" feel */
+body:has(.cinematic-hero) .status{
+  padding-bottom:70px;
+}
+body:has(.cinematic-hero) .lookup-result{
+  border-radius:10px;
+}
+
+/* footer */
+body:has(.cinematic-hero) footer{
+  max-width:none;
+  padding:38px max(24px,calc((100vw - 1132px)/2));
+  background:#e6dfd2;
+  border-top:0;
+}
+
+/* mobile is intentionally redesigned rather than merely stacked */
+@media(max-width:900px){
+  body:has(.cinematic-hero) .cinematic-hero{
+    min-height:auto;
+    padding-top:110px;
+    grid-template-columns:1fr;
+  }
+  body:has(.cinematic-hero) .hero-art{
+    order:-1;
+    height:300px;
+  }
+  body:has(.cinematic-hero) .cinematic-hero:before{
+    top:3%;
+    right:-4%;
+    font-size:260px;
+  }
+  body:has(.cinematic-hero) .event-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+  body:has(.cinematic-hero) .payment-proof{
+    padding-left:24px;
+    padding-right:24px;
+  }
+}
+@media(max-width:600px){
+  body:has(.cinematic-hero) .nav{
+    height:64px;
+    padding:9px 15px;
+  }
+  body:has(.cinematic-hero) .civil-wordmark b{
+    font-size:14px;
+  }
+  body:has(.cinematic-hero) .cinematic-hero{
+    padding:96px 18px 48px;
+    gap:4px;
+  }
+  body:has(.cinematic-hero) .cinematic-hero:after{
+    bottom:15px;
+    left:18px;
+    right:18px;
+  }
+  body:has(.cinematic-hero) .hero-art{
+    height:245px;
+  }
+  body:has(.cinematic-hero) .hero-kicker{
+    margin-top:20px;
+  }
+  body:has(.cinematic-hero) .hero h1{
+    font-size:clamp(68px,19vw,105px);
+    margin:15px 0 23px;
+  }
+  body:has(.cinematic-hero) .hero h1 em{
+    transform:none;
+  }
+  body:has(.cinematic-hero) .hero-label{
+    display:none;
+  }
+  body:has(.cinematic-hero) .section{
+    padding:58px 18px;
+  }
+  body:has(.cinematic-hero) .intro{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+  body:has(.cinematic-hero) .intro h2,
+  body:has(.cinematic-hero) .register-wrap h2,
+  body:has(.cinematic-hero) .two-col h2,
+  body:has(.cinematic-hero) .status-wrap h2{
+    font-size:48px;
+  }
+  body:has(.cinematic-hero) .register-wrap,
+  body:has(.cinematic-hero) .two-col,
+  body:has(.cinematic-hero) .status-wrap{
+    margin-top:28px;
+    gap:28px;
+  }
+  body:has(.cinematic-hero) .event-grid{
+    display:flex;
+    overflow-x:auto;
+    padding:0 18px 8px;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+  }
+  body:has(.cinematic-hero) .event-grid::-webkit-scrollbar{display:none}
+  body:has(.cinematic-hero) .event-grid .feature-card{
+    flex:0 0 78vw;
+    min-height:165px;
+    scroll-snap-align:start;
+  }
+  body:has(.cinematic-hero) .payment-proof{
+    padding:58px 18px;
+    margin-top:20px;
+  }
+  body:has(.cinematic-hero) .form-card{
+    padding:20px;
+    border-radius:16px;
+  }
+  body:has(.cinematic-hero) footer{
+    padding:30px 18px;
+  }
+}
