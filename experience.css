@@ -826,3 +826,8 @@ body:has(.cinematic-hero) footer strong span,
 body:has(.cinematic-hero) footer a:hover{
   color:#e45124;
 }
+
+
+/* Civil Engineering wordmark — black + orange */
+body:has(.cinematic-hero) .civil-wordmark .civil-black{color:#111!important}
+body:has(.cinematic-hero) .civil-wordmark .civil-orange{color:#e45124!important}
