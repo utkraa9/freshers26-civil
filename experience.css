@@ -1,94 +1,81 @@
-/* CIVIL '26 — construction / architecture visual system */
-:root{
-  --civil-bg:#f3f1eb;
-  --civil-paper:#fbfaf6;
-  --civil-ink:#171a19;
-  --civil-muted:#6e7470;
-  --civil-line:rgba(23,26,25,.13);
-  --civil-steel:#7b817d;
-  --civil-concrete:#c8c5bb;
-  --civil-orange:#df7b32;
-  --civil-orange-soft:#ef9a54;
-}
+/* CIVIL '26 — architectural construction scene, no blueprint/HUD aesthetic */
+.smvdu-brand{gap:11px}
+.smvdu-logo-wrap{width:36px;height:40px;display:grid;place-items:center;flex:0 0 36px}
+.smvdu-logo-wrap img{width:34px;height:38px;object-fit:contain}
+.smvdu-wordmark{display:block;line-height:1}
+.smvdu-wordmark b{font:700 10px/1.15 'Space Grotesk';letter-spacing:.05em}
+.smvdu-wordmark small{display:block;color:var(--muted);font-size:7px;letter-spacing:.14em;margin-top:5px}
+.brand-divider{height:28px;width:1px;background:var(--line);margin:0 3px}
+.civil-wordmark b{font:700 16px 'Space Grotesk';letter-spacing:.02em}
+.civil-wordmark b span{color:var(--accent)}
+.civil-wordmark small{display:block;color:var(--muted);font:700 7px Outfit;letter-spacing:.14em;margin-top:2px}
 
-html{background:var(--civil-bg)}
-body{background:var(--civil-bg)!important;color:var(--civil-ink)!important}
-.ambient{opacity:.045!important;filter:blur(100px)}
-.ambient-one{background:#df7b32!important}.ambient-two{background:#77766f!important}
+/* ---------- hero ---------- */
+.cinematic-hero{min-height:calc(100vh - 76px);padding-top:118px;padding-bottom:60px;grid-template-columns:.88fr 1.12fr;gap:24px}
+.cinematic-hero .hero-content{position:relative;z-index:4}
+.hero-kicker{margin-top:16px;color:var(--muted);font:700 10px Outfit;letter-spacing:.16em}
+.cinematic-hero .hero h1{margin-top:16px}
 
-/* University / department header */
-.nav{background:rgba(251,250,246,.88)!important;border-bottom:1px solid var(--civil-line)!important;box-shadow:0 4px 20px rgba(25,28,26,.035);color:var(--civil-ink)}
-.logo{color:var(--civil-ink)!important}.smvdu-logo-wrap img{filter:none!important}
-.smvdu-wordmark b,.civil-wordmark b{color:var(--civil-ink)}
-.smvdu-wordmark small,.civil-wordmark small{color:#777c78!important}
-.brand-divider{background:var(--civil-line)!important}
-.civil-wordmark b span{color:var(--civil-orange)!important}
-.nav nav a{color:#6f7672!important}.nav nav a:hover{color:var(--civil-orange)!important}
-.nav-cta,.button{background:var(--civil-ink)!important;border-color:var(--civil-ink)!important;color:#fff!important;box-shadow:none!important}
-.nav-cta:hover,.button:hover{background:var(--civil-orange)!important;border-color:var(--civil-orange)!important;transform:translateY(-2px);box-shadow:0 12px 25px rgba(223,123,50,.16)!important}
+/* ---------- architectural 3D scene ---------- */
+.civil-scene{height:450px;position:relative;isolation:isolate;perspective:1100px;overflow:hidden}
+.civil-scene:before{content:'';position:absolute;inset:8% 4% 4%;background:radial-gradient(circle at 55% 45%,rgba(223,123,50,.12),transparent 42%);filter:blur(2px);z-index:-2}
+.scene-grid{position:absolute;left:3%;right:1%;bottom:4%;height:46%;opacity:.7;background:linear-gradient(rgba(24,26,27,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(24,26,27,.06) 1px,transparent 1px);background-size:34px 34px;transform:perspective(380px) rotateX(60deg) scale(1.18);transform-origin:bottom center;mask-image:linear-gradient(to top,black,transparent 85%)}
+.scene-shadow{position:absolute;width:72%;height:18%;right:5%;bottom:10%;background:rgba(38,34,29,.14);filter:blur(18px);border-radius:50%;transform:skewX(-25deg)}
+.structure{position:absolute;width:68%;height:62%;right:12%;top:20%;transform:skewY(-7deg) rotateY(-8deg);transform-style:preserve-3d;animation:structureFloat 7s ease-in-out infinite}
+.floor{position:absolute;left:8%;width:82%;height:14px;background:linear-gradient(90deg,#77756f,#a8a49a 60%,#6d6b65);border:1px solid rgba(24,26,27,.18);box-shadow:0 7px 0 rgba(24,26,27,.05);transform:skewX(-25deg);transform-origin:left}
+.floor:after{content:'';position:absolute;inset:3px 7px;background:rgba(255,255,255,.35)}
+.floor i{position:absolute;top:10px;width:5px;height:100px;background:linear-gradient(90deg,#686762,#b2aea4);border-left:1px solid rgba(24,26,27,.18);transform:skewY(7deg);transform-origin:top}
+.floor i:nth-child(1){left:8%}.floor i:nth-child(2){left:49%}.floor i:nth-child(3){right:8%}
+.floor-1{top:72%;z-index:3}.floor-2{top:45%;z-index:2}.floor-3{top:18%;z-index:1}
+.column{position:absolute;width:10px;height:74%;bottom:11%;background:linear-gradient(90deg,#5f5e59,#bdb9ae 48%,#73716b);border-left:1px solid rgba(24,26,27,.22);box-shadow:3px 0 0 rgba(24,26,27,.05)}
+.column-a{left:14%}.column-b{left:49%}.column-c{right:14%;height:66%}.column-d{left:72%;height:66%}
+.beam{position:absolute;height:8px;background:#6d6b65;transform:rotate(-7deg);transform-origin:left center;box-shadow:0 3px 0 rgba(24,26,27,.08)}
+.beam-a{width:74%;left:14%;top:44%}.beam-b{width:68%;left:17%;top:70%}
+.brace{position:absolute;width:3px;height:45%;background:var(--accent);opacity:.72;transform-origin:top}
+.brace-a{left:35%;top:47%;transform:rotate(31deg)}.brace-b{left:65%;top:21%;transform:rotate(-31deg)}
+.crane{position:absolute;right:7%;top:4%;width:45%;height:68%;z-index:5;animation:craneFloat 8s ease-in-out infinite}
+.crane-mast{position:absolute;right:22%;top:0;width:8px;height:78%;background:repeating-linear-gradient(135deg,#6d6b65 0 5px,#aaa69c 5px 8px);border-left:1px solid rgba(24,26,27,.2)}
+.crane-arm{position:absolute;right:20%;top:0;width:78%;height:8px;background:#77746d;transform:rotate(-1deg);transform-origin:right center}
+.crane-arm:after{content:'';position:absolute;left:0;top:0;width:100%;height:2px;background:var(--accent)}
+.crane-cable{position:absolute;left:28%;top:4%;height:48%;width:1px;background:#4f4d48}
+.crane-hook{position:absolute;left:calc(28% - 5px);top:50%;width:11px;height:17px;border:2px solid var(--accent);border-top:0;border-radius:0 0 8px 8px;transform:rotate(8deg)}
+.crane-load{position:absolute;left:calc(28% - 18px);top:50%;width:36px;height:22px;background:#a5a198;border:1px solid #65625c;box-shadow:inset 0 4px rgba(255,255,255,.25)}
+.scene-caption{position:absolute;left:2%;bottom:7%;display:flex;flex-direction:column;gap:2px;color:var(--ink);font:700 10px Outfit;letter-spacing:.15em}
+.scene-caption span{color:var(--accent);font-size:7px}
+.scene-marker{position:absolute;color:var(--accent);font:700 8px Outfit;letter-spacing:.12em;display:flex;align-items:center;gap:7px}
+.scene-marker:before{content:'';width:24px;height:1px;background:var(--accent)}
+.scene-marker span{color:var(--muted);font-size:7px}
+.marker-a{left:2%;top:29%}.marker-b{right:1%;bottom:30%}
+.structure,.crane,.scene-marker,.scene-caption{opacity:0;animation:sceneIn .9s cubic-bezier(.2,.7,.2,1) .25s forwards}
+.crane{animation-delay:.5s}.marker-a{animation-delay:.8s}.marker-b{animation-delay:1s}.scene-caption{animation-delay:1.1s}
+@keyframes sceneIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes structureFloat{0%,100%{transform:skewY(-7deg) rotateY(-8deg) translateY(0)}50%{transform:skewY(-7deg) rotateY(-8deg) translateY(-5px)}}
+@keyframes craneFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(.6deg)}}
 
-/* Subtle CAD drafting paper */
-.cinematic-hero{background:linear-gradient(180deg,rgba(255,255,255,.38),transparent 72%);min-height:calc(100vh - 72px)!important}
-.cinematic-hero:after{content:'';position:absolute;inset:72px 0 0;pointer-events:none;opacity:.48;background-image:linear-gradient(rgba(40,45,42,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(40,45,42,.045) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,transparent 0%,#000 20%,transparent 82%)}
-.hero-content{z-index:5!important}
-.eyebrow{color:#5d6560!important;letter-spacing:.12em!important}.eyebrow span{background:var(--civil-orange)!important;box-shadow:0 0 0 4px rgba(223,123,50,.1)!important}
-.hero-kicker{color:#858a86!important}
-.hero h1{color:var(--civil-ink)!important}.hero h1 em{color:var(--civil-orange)!important}
-.hero-lead{color:#626a65!important}
-.quiet-link{color:#5d6560!important}.quiet-link:hover{color:var(--civil-orange)!important}.quiet-link span{color:var(--civil-orange)!important}
-
-/* Main construction illustration */
-.cinematic-scene{z-index:2!important;height:570px!important;filter:none!important}
-.scene-glow{width:470px!important;height:330px!important;background:radial-gradient(ellipse,rgba(223,123,50,.10),rgba(190,186,175,.12) 42%,transparent 72%)!important;filter:blur(7px)!important}
-.scene-grid{background-image:linear-gradient(rgba(75,81,77,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(75,81,77,.10) 1px,transparent 1px)!important;background-size:44px 44px!important;opacity:.65!important}
-.scene-ring{border-color:rgba(86,91,87,.2)!important;animation:none!important}
-.ring-one{width:520px!important;height:190px!important}.ring-two{width:385px!important;height:135px!important;border-color:rgba(223,123,50,.18)!important}
-.structure{border:2px solid rgba(91,97,93,.58)!important;background:linear-gradient(145deg,rgba(211,208,198,.34),rgba(116,119,113,.08))!important;box-shadow:18px 18px 0 rgba(55,58,55,.09),0 25px 55px rgba(30,33,31,.12)!important;animation:constructionFloat 8s ease-in-out infinite!important}
-.structure-back{opacity:.22!important}
-.structure i{background:linear-gradient(transparent,rgba(90,97,92,.55),transparent)!important}
-.structure:before,.structure:after{background:rgba(92,98,94,.42)!important}
-.deck{background:linear-gradient(180deg,#d0cdc3,#aaa79d 48%,#c4c0b6)!important;border:1px solid rgba(61,65,62,.5)!important;box-shadow:0 10px 0 rgba(46,49,47,.15),0 22px 35px rgba(0,0,0,.12)!important}
-.deck span{background:rgba(58,62,59,.38)!important}
-.tower{border:2px solid rgba(101,106,101,.65)!important;background:linear-gradient(90deg,rgba(207,204,195,.48),rgba(99,102,97,.12))!important;animation:columnFloat 8s ease-in-out infinite!important}
-.tower i{border-bottom-color:rgba(100,106,101,.32)!important}
-.cable{background:linear-gradient(90deg,transparent,rgba(92,98,94,.58),transparent)!important}
-.cinematic-scene .hero-label{color:#707671!important}.cinematic-scene .hero-label small{color:var(--civil-orange)!important}
-
-@keyframes constructionFloat{0%,100%{margin-top:0;transform:translate(-50%,-50%) rotateX(58deg) rotateZ(-3deg) rotateY(-12deg)}50%{margin-top:-7px;transform:translate(-50%,-54%) rotateX(58deg) rotateZ(-3deg) rotateY(-12deg)}}
-
-/* Event sections — paper, concrete and steel */
-.section{color:var(--civil-ink)}
-.section-tag,.card-label,.detail-row span{color:var(--civil-orange)!important}
-.section h2{color:var(--civil-ink)!important}.section h2 em{color:var(--civil-orange)!important}
-.intro p,.logistics-content>div>p,.register-wrap>div>p,.two-col>div>p,.status-wrap>div>p{color:var(--civil-muted)!important}
-.ticker{border-color:var(--civil-line)!important;color:#737a75!important;background:rgba(255,255,255,.18)}
-.ticker i{background:var(--civil-orange)!important}
-.event-grid{background:var(--civil-line)!important}
-.feature-card{background:var(--civil-paper)!important;border:0!important}
-.feature-card:hover{background:#fff!important;transform:translateY(-4px);box-shadow:0 16px 35px rgba(31,34,31,.07)}
-.card-number{color:#a0a49f!important}.feature-card h3{color:var(--civil-ink)!important}.feature-card p{color:#777e79!important}.feature-card a{color:#555c58!important}.feature-card a:hover{color:var(--civil-orange)!important}
-.logistics-list{border-color:var(--civil-line)!important}.logistics-list>div{border-color:var(--civil-line)!important}.logistics-list b{color:var(--civil-ink)!important}.logistics-list small{color:#777e79!important}.logistics-list>div:hover{padding-left:8px;background:rgba(255,255,255,.4)}
-
-/* Forms / payment */
-.form-card,.upi-card{background:rgba(255,255,255,.78)!important;border:1px solid var(--civil-line)!important;box-shadow:0 10px 30px rgba(30,33,31,.045)!important;backdrop-filter:blur(12px)}
-.form-card:before{background:var(--civil-orange)!important}
-.form-card label{color:#6d7470!important}.form-card input,.form-card select{background:#fff!important;color:var(--civil-ink)!important;border-color:rgba(23,26,25,.15)!important}.form-card input:focus,.form-card select:focus{border-color:rgba(223,123,50,.65)!important;box-shadow:0 0 0 2px rgba(223,123,50,.08)!important}.form-card input::placeholder{color:#a1a6a2!important}
-.amount-row{border-color:rgba(223,123,50,.28)!important;background:rgba(223,123,50,.045)!important}.amount-row span,.mini-heading{color:#777e79!important}.amount-row strong,.lookup-result span{color:var(--civil-orange)!important}
-.form-message{color:#6d7470!important}.qr-image{background:#fff!important}.upi-card strong{color:var(--civil-ink)}.upi-card span,.muted-note{color:#777e79!important}
-.lookup-result{border-color:var(--civil-line)!important;color:#737a75!important}.lookup-result strong{color:var(--civil-ink)!important}
-.detail-row{border-color:var(--civil-line)!important}.detail-row>div{border-color:var(--civil-line)!important}.detail-row b{color:var(--civil-ink)!important}
-
-footer{border-color:var(--civil-line)!important;color:var(--civil-ink)}footer strong{color:var(--civil-ink)}footer strong span{color:var(--civil-orange)}footer p{color:#777e79}footer a{color:#606864}footer a:hover{color:var(--civil-orange)}
-
-/* Keep reveal motion elegant */
-.reveal{transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)!important}
+.section-tag,.card-label,.detail-row span{color:var(--accent)!important}
+.button,.nav-cta{background:var(--ink)!important;border-color:var(--ink)!important;color:#fff!important}
+.button:hover,.nav-cta:hover{background:var(--accent)!important;border-color:var(--accent)!important}
 
 @media(max-width:900px){
-  .smvdu-wordmark,.brand-divider{display:none}.nav nav{display:none}.smvdu-logo-wrap{width:34px}.smvdu-logo-wrap img{width:32px}
-  .cinematic-hero{padding-top:112px!important}.cinematic-scene{height:410px!important;margin-top:-20px}.structure{width:315px!important;height:150px!important}.deck{width:360px!important}.tower{height:185px!important}.tower-left{left:17%}.tower-right{right:14%}.ring-one{width:390px!important;height:145px!important}.ring-two{width:290px!important;height:105px!important}
+  .smvdu-wordmark,.brand-divider{display:none}
+  .smvdu-logo-wrap{width:32px}.smvdu-logo-wrap img{width:30px}
+  .civil-wordmark b{font-size:14px}
+  .nav nav{display:none}
+  .cinematic-hero{grid-template-columns:1fr;min-height:auto;padding-top:118px}
+  .civil-scene{height:330px;order:-1}
 }
 @media(max-width:600px){
-  .nav{height:66px;padding:10px 15px}.smvdu-logo-wrap{height:38px;width:31px}.smvdu-logo-wrap img{width:29px;height:35px}.civil-wordmark b{font-size:13px}.civil-wordmark small{display:none}.nav-cta{padding:10px 13px}
-  .cinematic-hero{padding:102px 18px 50px!important}.hero h1{font-size:clamp(68px,20vw,100px)!important}.hero-lead{font-size:15px!important}.cinematic-scene{height:345px!important;margin-top:0}.structure{width:255px!important;height:122px!important}.deck{width:285px!important;height:13px!important}.tower{width:31px!important;height:145px!important}.tower-left{left:12%}.tower-right{right:9%}.ring-one{width:300px!important;height:110px!important}.ring-two{width:220px!important;height:82px!important}.cable-a{width:185px!important}.cable-b{width:195px!important}.cable-c{width:275px!important}.scene-grid{background-size:30px 30px!important}
-  .section{padding:78px 18px!important}.intro{grid-template-columns:1fr!important;gap:25px}.event-grid{grid-template-columns:1fr 1fr!important}.feature-card{min-height:210px!important;padding:20px!important}.logistics-content,.register-wrap,.two-col,.status-wrap{grid-template-columns:1fr!important;gap:35px!important}.logistics-list>div{grid-template-columns:38px 1fr!important}.logistics-list small{grid-column:2}.form-grid{grid-template-columns:1fr!important}.form-grid .full{grid-column:auto}.qr-list{grid-template-columns:1fr 1fr!important}.detail-row{grid-template-columns:1fr!important}.detail-row>div{display:flex;justify-content:space-between;align-items:center}.detail-row b{margin-top:0}.cinematic-hero:after{background-size:30px 30px}
+  .smvdu-brand{gap:7px}.smvdu-logo-wrap{height:36px;width:29px}.smvdu-logo-wrap img{width:27px;height:33px}
+  .civil-wordmark small{display:none}.civil-wordmark b{font-size:13px}
+  .cinematic-hero{padding-left:18px;padding-right:18px;padding-top:108px}.cinematic-hero .hero-lead{font-size:15px}
+  .civil-scene{height:255px;margin-top:4px}
+  .structure{width:72%;height:58%;right:10%;top:22%}
+  .crane{right:2%;width:48%;height:72%}
+  .scene-grid{background-size:25px 25px}
+  .marker-b{display:none}
+  .scene-marker{font-size:7px}.scene-marker span{display:none}
+  .scene-caption{left:1%;bottom:5%}
+}
+@media(prefers-reduced-motion:reduce){
+  .structure,.crane,.scene-marker,.scene-caption{animation:none!important;opacity:1!important}
 }
