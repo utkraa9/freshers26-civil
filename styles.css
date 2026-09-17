@@ -230,3 +230,114 @@ footer a:hover{color:var(--accent)}
 .feature-card,.form-card,.upi-card{box-shadow:0 10px 30px rgba(40,35,28,.025)}
 .feature-card:hover,.upi-card:hover{box-shadow:0 16px 36px rgba(40,35,28,.07)}
 @media(max-width:600px){.smvdu-wordmark b{font-size:9px}.civil-wordmark b{letter-spacing:.01em}}
+
+
+/* =========================================================
+   CIVIL ORGANIZER — OVERVIEW DASHBOARD
+   ========================================================= */
+.overview-head{
+  margin-bottom:28px;
+}
+.overview-head h2{
+  font-size:clamp(40px,5vw,58px);
+  margin:4px 0 0;
+  letter-spacing:-.045em;
+}
+.overview-subtitle{
+  color:var(--muted);
+  font-size:15px;
+  margin:12px 0 0;
+}
+.overview-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  background:var(--surface);
+  margin-bottom:22px;
+}
+.overview-stats article{
+  min-height:150px;
+  padding:24px 28px;
+  border-right:1px solid var(--line);
+}
+.overview-stats article:last-child{border-right:0}
+.overview-stats span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  letter-spacing:.02em;
+}
+.overview-stats strong{
+  display:block;
+  margin-top:10px;
+  color:var(--accent);
+  font:700 clamp(30px,4vw,44px)/1 'Space Grotesk';
+  letter-spacing:-.04em;
+}
+.collection-summary{
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:28px 38px;
+  background:var(--surface);
+  margin-bottom:58px;
+}
+.collection-summary h3{
+  margin:0 0 20px;
+  color:var(--ink);
+  font:600 30px 'Space Grotesk';
+  letter-spacing:-.035em;
+}
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:17px 0;
+  border-bottom:1px solid var(--line-soft);
+  color:var(--ink);
+  font-size:15px;
+}
+.summary-row:last-child{border-bottom:0}
+.summary-row strong{
+  color:var(--ink);
+  font:700 17px 'Space Grotesk';
+}
+.dashboard-control-heading{
+  margin:0 0 24px;
+}
+.dashboard-control-heading h3{
+  margin:6px 0 0;
+  font:600 32px 'Space Grotesk';
+  letter-spacing:-.035em;
+}
+@media(max-width:900px){
+  .overview-stats{grid-template-columns:1fr 1fr}
+  .overview-stats article:nth-child(2){border-right:0}
+  .overview-stats article:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .collection-summary{padding:25px 28px}
+}
+@media(max-width:600px){
+  .overview-head{
+    align-items:flex-start;
+    gap:20px;
+  }
+  .overview-head h2{font-size:48px}
+  .overview-subtitle{font-size:14px}
+  .overview-stats{grid-template-columns:1fr 1fr;border-radius:16px}
+  .overview-stats article{
+    min-height:125px;
+    padding:20px 18px;
+  }
+  .overview-stats span{font-size:11px}
+  .overview-stats strong{font-size:31px}
+  .collection-summary{
+    padding:22px;
+    border-radius:18px;
+    margin-bottom:48px;
+  }
+  .collection-summary h3{font-size:27px}
+  .summary-row{padding:15px 0}
+  .dashboard-control-heading h3{font-size:27px}
+}
