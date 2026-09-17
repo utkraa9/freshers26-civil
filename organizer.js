@@ -44,10 +44,22 @@ async function loadConfig() {
   $('#configSupport').value = data.support_text ?? '';
 }
 function renderStats() {
+  const verified = registrations.filter(r => r.payment_status === 'verified');
+  const pending = registrations.filter(r => r.payment_status === 'submitted' || r.payment_status === 'pending');
+  const rejected = registrations.filter(r => r.payment_status === 'rejected');
+  const collected = verified.reduce((sum, r) => sum + Number(r.contribution || 0), 0);
+  const pendingAmount = pending.reduce((sum, r) => sum + Number(r.contribution || 0), 0);
+  const seniors = registrations.filter(r => String(r.year).toLowerCase().includes('senior') || r.year === '2nd Year').length;
+  const juniors = registrations.filter(r => String(r.year).toLowerCase().includes('junior') || r.year === '1st Year').length;
+
   $('#statTotal').textContent = registrations.length;
-  $('#statPending').textContent = registrations.filter(r => r.payment_status === 'submitted').length;
-  $('#statVerified').textContent = registrations.filter(r => r.payment_status === 'verified').length;
-  $('#statRejected').textContent = registrations.filter(r => r.payment_status === 'rejected').length;
+  $('#statVerified').textContent = verified.length;
+  $('#statCollected').textContent = '₹' + collected.toLocaleString('en-IN');
+  $('#statPendingAmount').textContent = '₹' + pendingAmount.toLocaleString('en-IN');
+  $('#summarySeniors').textContent = seniors;
+  $('#summaryJuniors').textContent = juniors;
+  $('#summaryPending').textContent = pending.length;
+  $('#summaryRejected').textContent = rejected.length;
 }
 async function currentUser() {
   const { data: { user } } = await supabase.auth.getUser();
@@ -95,7 +107,7 @@ function renderRows() {
 async function loadRegistrations() {
   message(tableMessage, 'Loading registrations…');
   const { data, error } = await supabase.from('registrations').select('*').order('created_at', { ascending: false });
-  if (error) { message(tableMessage, error.message, true); return; }
+  if (error) { message(tableMessage, error.message || 'Could not load registrations.', true); return; }
   registrations = data || []; renderStats(); renderRows(); message(tableMessage, `${registrations.length} registration${registrations.length === 1 ? '' : 's'} loaded.`);
 }
 async function openStudent(reference) {
