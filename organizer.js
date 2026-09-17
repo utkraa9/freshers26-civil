@@ -11,7 +11,6 @@ const MAIN_ADMIN_EMAIL = 'pqdmshreeambasta@gmail.com';
 const loginSection = $('#loginSection'), dashboard = $('#dashboard');
 const loginMessage = $('#loginMessage'), tableMessage = $('#tableMessage');
 const requestMessage = $('#requestMessage'), accessMessage = $('#accessMessage');
-const isMainAdmin = () => String(supabase.auth.getUser ? '' : '').length === -1;
 function message(el, text, error=false) { el.textContent = text; el.classList.toggle('error-message', error); }
 function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function statusLabel(s) { return s === 'submitted' ? 'Proof submitted' : s === 'verified' ? 'Verified' : s === 'rejected' ? 'Rejected' : 'Pending'; }
@@ -24,6 +23,16 @@ async function isOrganizer() {
   const { data, error } = await supabase.rpc('is_civil_organizer');
   if (error) return { ok: false, reason: `Authorization check failed: ${error.message}` };
   return { ok: data === true, reason: data === true ? '' : 'This account is not authorized as a Civil organizer.' };
+}
+
+function isMissingAccessMigration(error) {
+  const text = String(error?.message || '').toLowerCase();
+  return text.includes('list_civil_organizer_requests') || text.includes('schema cache') || text.includes('could not find the function');
+}
+function showMigrationMessage(el) {
+  if (!el) return;
+  el.innerHTML = '<strong>Organizer approval system is not installed yet.</strong><br>Run <code>supabase-organizer-access.sql</code> once in the Civil Supabase SQL Editor, then refresh this page.';
+  el.classList.add('error-message','setup-message');
 }
 
 async function loadConfig() {
@@ -56,7 +65,7 @@ async function loadOrganizerRequests() {
     return;
   }
   const { data, error } = await supabase.rpc('list_civil_organizer_requests');
-  if (error) { message(accessMessage, error.message, true); return; }
+  if (error) { if (isMissingAccessMigration(error)) showMigrationMessage(accessMessage); else message(accessMessage, error.message, true); return; }
   const rows = data || [];
   $('#accessRequests').innerHTML = rows.length ? rows.map(r => `
     <div class="access-request">
@@ -135,7 +144,7 @@ $('#organizerRequestForm').addEventListener('submit', async (e) => {
   const { data, error } = await supabase.auth.signUp({ email:d.email.trim().toLowerCase(), password:d.password, options:{data:{full_name:d.name.trim()}} });
   if (error) { message(requestMessage, error.message, true); return; }
   const { error: requestError } = await supabase.rpc('request_civil_organizer', { p_email:d.email.trim().toLowerCase(), p_name:d.name.trim() });
-  if (requestError) { message(requestMessage, requestError.message, true); return; }
+  if (requestError) { if (isMissingAccessMigration(requestError)) showMigrationMessage(requestMessage); else message(requestMessage, requestError.message, true); return; }
   if (data?.session) await supabase.auth.signOut();
   message(requestMessage, 'Request submitted. The main admin must approve your organizer access.');
   e.currentTarget.reset();
