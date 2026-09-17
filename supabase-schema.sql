@@ -40,6 +40,14 @@ create policy "public can read civil event config" on public.event_config for se
 drop policy if exists "organizers can update civil event config" on public.event_config;
 create policy "organizers can update civil event config" on public.event_config for update to authenticated using(true) with check(true);
 
+-- Explicit table privileges are required in addition to RLS.
+grant insert on table public.registrations to anon, authenticated;
+grant select, update on table public.registrations to authenticated;
+grant insert on table public.payment_proofs to anon, authenticated;
+grant select, update on table public.payment_proofs to authenticated;
+grant select on table public.event_config to anon, authenticated;
+grant update on table public.event_config to authenticated;
+
 insert into storage.buckets(id,name,public) values('civil-payment-proofs','civil-payment-proofs',true) on conflict(id) do nothing;
 drop policy if exists "public can upload civil payment proof" on storage.objects;
 create policy "public can upload civil payment proof" on storage.objects for insert to anon,authenticated with check(bucket_id='civil-payment-proofs');
