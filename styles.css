@@ -341,3 +341,62 @@ footer a:hover{color:var(--accent)}
   .summary-row{padding:15px 0}
   .dashboard-control-heading h3{font-size:27px}
 }
+
+
+/* =========================================================
+   CIVIL ORGANIZER — ACCESS MANAGEMENT
+   ========================================================= */
+.auth-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.auth-grid .auth-panel{margin:0}
+.auth-panel h3{font:600 25px 'Space Grotesk';margin:8px 0 10px}
+.access-panel{
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--surface);
+  padding:28px;
+}
+.access-header{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-start;
+  margin-bottom:24px;
+}
+.access-header h3{font:600 27px 'Space Grotesk';margin:5px 0}
+.admin-badge{
+  padding:7px 11px;
+  border-radius:999px;
+  background:var(--ink);
+  color:#fff;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.1em;
+}
+.access-request{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:18px 0;
+  border-top:1px solid var(--line);
+}
+.access-request strong{display:block;font:600 16px 'Space Grotesk'}
+.access-request small{display:block;color:var(--muted);margin-top:3px}
+.access-request span{display:block;color:var(--muted);font-size:10px;margin-top:5px}
+.access-actions{display:flex;gap:8px;flex-shrink:0}
+.access-actions button{min-height:40px}
+.access-empty{padding:24px 0;color:var(--muted);font-size:13px}
+@media(max-width:900px){
+  .auth-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .access-panel{padding:20px}
+  .access-header{flex-direction:column}
+  .access-request{align-items:flex-start;flex-direction:column}
+  .access-actions{width:100%}
+  .access-actions button{flex:1}
+}
