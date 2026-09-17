@@ -681,3 +681,44 @@ body:has(.cinematic-hero) .freshers-art{
     max-width:100%;
   }
 }
+
+
+/* Organizer button beside Register in top-right navigation */
+body:has(.cinematic-hero) .nav-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex:0 0 auto;
+}
+body:has(.cinematic-hero) .nav-organizer{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:11px 15px;
+  border:1px solid rgba(21,21,21,.16);
+  border-radius:999px;
+  background:transparent;
+  color:var(--ink);
+  text-decoration:none;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.04em;
+  transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;
+}
+body:has(.cinematic-hero) .nav-organizer:hover{
+  background:var(--ink);
+  border-color:var(--ink);
+  color:#fff;
+  transform:translateY(-1px);
+}
+@media(max-width:600px){
+  body:has(.cinematic-hero) .nav-actions{
+    gap:6px;
+  }
+  body:has(.cinematic-hero) .nav-actions .nav-cta,
+  body:has(.cinematic-hero) .nav-actions .nav-organizer{
+    padding:9px 10px;
+    font-size:9px;
+  }
+}
