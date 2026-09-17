@@ -23,32 +23,35 @@
 <main id="top">
 <section class="hero cinematic-hero" id="event">
   <div class="hero-content">
-    <div class="eyebrow"><span></span> SHRI MATA VAISHNO DEVI UNIVERSITY · CIVIL ENGINEERING</div>
+    <div class="eyebrow"><span></span> SMVDU · CIVIL ENGINEERING</div>
     <div class="hero-kicker">WELCOME BATCH · 2026</div>
     <h1>Freshers'<br><em>26.</em></h1>
-    <p class="hero-lead">A new batch. A new foundation. One evening to begin it all.</p>
-    <div class="hero-actions"><a class="button" href="#register">Register Now <span>↗</span></a><a class="quiet-link" href="#contribution">Explore event <span>↓</span></a></div>
+    <div class="hero-actions"><a class="button" href="#register">Register Now <span>↗</span></a></div>
   </div>
-  <div class="hero-art civil-scene" aria-hidden="true">
-    <div class="scene-grid"></div>
-    <div class="scene-shadow"></div>
-    <div class="structure">
-      <div class="floor floor-1"><i></i><i></i><i></i></div>
-      <div class="floor floor-2"><i></i><i></i><i></i></div>
-      <div class="floor floor-3"><i></i><i></i><i></i></div>
-      <div class="column column-a"></div><div class="column column-b"></div>
-      <div class="column column-c"></div><div class="column column-d"></div>
-      <div class="beam beam-a"></div><div class="beam beam-b"></div>
-      <div class="brace brace-a"></div><div class="brace brace-b"></div>
-    </div>
-    <div class="crane">
-      <div class="crane-mast"></div><div class="crane-arm"></div>
-      <div class="crane-cable"></div><div class="crane-hook"></div>
-      <span class="crane-load"></span>
-    </div>
-    <div class="scene-caption"><b>CE / 26</b><span>BUILDING THE BEGINNING</span></div>
-    <div class="scene-marker marker-a">01 <span>STRUCTURE</span></div>
-    <div class="scene-marker marker-b">02 <span>FOUNDATION</span></div>
+  <div class="hero-art" aria-hidden="true">
+    <svg class="blueprint" viewBox="0 0 620 460" xmlns="http://www.w3.org/2000/svg">
+      <path class="grid-line" d="M0,90 L620,90 M0,190 L620,190 M0,290 L620,290 M0,380 L620,380" stroke-width="1"/>
+      <path class="grid-line" d="M120,20 L120,460 M290,20 L290,460 M470,20 L470,460" stroke-width="1"/>
+      <path class="draw" d="M40,380 L580,380" style="--delay:0s"/>
+      <path class="draw" d="M150,380 L150,190 L172,190 L172,380" style="--delay:.15s"/>
+      <path class="draw" d="M410,380 L410,232 L432,232 L432,380" style="--delay:.3s"/>
+      <path class="draw" d="M172,190 L332,190" style="--delay:1s"/>
+      <path class="draw" d="M194,190 L194,206 M222,190 L222,206 M250,190 L250,206 M278,190 L278,206 M306,190 L306,206" style="--delay:1.3s"/>
+      <path class="draw" d="M470,380 L470,90" style="--delay:.1s"/>
+      <path class="draw" d="M470,90 L206,90 M470,90 L534,106" style="--delay:.6s"/>
+      <path class="draw draw-accent" d="M470,142 L248,90" style="--delay:.95s"/>
+      <path class="draw" d="M482,336 L560,336 L560,352 L482,352 Z" style="--delay:1.5s"/>
+      <g class="crane-hook" style="--pivot-x:288px;--pivot-y:90px">
+        <path class="draw" d="M288,90 L288,166" style="--delay:1.6s"/>
+      </g>
+      <g class="hoist">
+        <rect x="482" y="336" width="78" height="16" rx="2"/>
+        <text x="521" y="348" text-anchor="middle">26</text>
+      </g>
+      <path class="dim" d="M150,408 L150,420 M432,408 L432,420 M150,414 L432,414"/>
+      <text class="dim-text" x="291" y="436" text-anchor="middle">SPAN — 26.0 M</text>
+    </svg>
+    <div class="hero-label">SMVDU / CE / 26<br><small>BUILDING THE BEGINNING</small></div>
   </div>
 </section>
 <section class="ticker"><span>FRESHERS'26</span><i></i><span>CIVIL ENGINEERING</span><i></i><span>SMVDU</span><i></i><span>NEW BEGINNINGS</span><i></i><span>2026</span></section>
@@ -63,6 +66,12 @@
 <footer><div><strong>CIVIL<span>'26</span></strong><p>Department of Civil Engineering · Shri Mata Vaishno Devi University</p></div><a href="organizer.html">Organizer ↗</a></footer>
 <script src="config.js"></script><script type="module" src="app.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded',()=>{const reveal=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.section,.feature-card,.logistics-list>div').forEach(e=>{e.classList.add('reveal');reveal.observe(e)});});
+document.addEventListener('DOMContentLoaded',()=>{const reveal=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.section,.feature-card,.logistics-list>div').forEach(e=>{e.classList.add('reveal');reveal.observe(e)});
+const bp=document.querySelector('.blueprint');
+if(bp){
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduced){bp.querySelectorAll('.draw').forEach(p=>{const len=p.getTotalLength();p.style.strokeDasharray=len;p.style.strokeDashoffset=len;});}
+  requestAnimationFrame(()=>bp.classList.add('is-ready'));
+}});
 </script>
 </body></html>
