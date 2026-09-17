@@ -722,3 +722,107 @@ body:has(.cinematic-hero) .nav-organizer:hover{
     font-size:9px;
   }
 }
+
+
+/* CIVIL ENGINEERING — BLACK + ORANGE PALETTE */
+body:has(.cinematic-hero){
+  --bg:#f5f1e8;
+  --surface:#fffdf8;
+  --ink:#111111;
+  --muted:#66645f;
+  --line:rgba(17,17,17,.14);
+  --accent:#e45124;
+  --accent-soft:#ff7a3d;
+  --accent-wash:rgba(228,81,36,.08);
+  background:
+    radial-gradient(circle at 88% 8%,rgba(228,81,36,.08),transparent 24rem),
+    linear-gradient(180deg,#f8f4ec 0%,#f5f1e8 55%,#eee8dc 100%);
+}
+body:has(.cinematic-hero) .nav{
+  background:rgba(245,241,232,.92);
+  border-bottom-color:rgba(17,17,17,.12);
+}
+body:has(.cinematic-hero) .nav-cta,
+body:has(.cinematic-hero) .button{
+  background:#111!important;
+  border-color:#111!important;
+  color:#fff!important;
+}
+body:has(.cinematic-hero) .nav-cta:hover,
+body:has(.cinematic-hero) .button:hover{
+  background:#e45124!important;
+  border-color:#e45124!important;
+}
+body:has(.cinematic-hero) .hero h1,
+body:has(.cinematic-hero) .section h2,
+body:has(.cinematic-hero) .civil-wordmark b,
+body:has(.cinematic-hero) .smvdu-wordmark b{
+  color:#111;
+}
+body:has(.cinematic-hero) .hero h1 em,
+body:has(.cinematic-hero) .hero-kicker,
+body:has(.cinematic-hero) .section-tag,
+body:has(.cinematic-hero) .card-label,
+body:has(.cinematic-hero) .detail-row span,
+body:has(.cinematic-hero) .amount-row strong{
+  color:#e45124!important;
+}
+body:has(.cinematic-hero) .event-grid .feature-card:nth-child(1){
+  background:#111;
+  border-color:#111;
+}
+body:has(.cinematic-hero) .event-grid .feature-card:nth-child(1) .card-number{
+  color:#ff7a3d;
+}
+body:has(.cinematic-hero) .payment-proof{
+  background:#111;
+}
+body:has(.cinematic-hero) .payment-proof h2 em{
+  color:#ff7a3d;
+}
+body:has(.cinematic-hero) .freshers-art .art-line,
+body:has(.cinematic-hero) .freshers-art .art-hook{
+  stroke:#111;
+}
+body:has(.cinematic-hero) .freshers-art .art-accent,
+body:has(.cinematic-hero) .freshers-art .hook-end{
+  stroke:#e45124;
+}
+body:has(.cinematic-hero) .freshers-art .art-dot,
+body:has(.cinematic-hero) .freshers-art .art-block rect{
+  fill:#e45124;
+}
+body:has(.cinematic-hero) .hero-label small{
+  color:#e45124;
+}
+body:has(.cinematic-hero) .nav-organizer{
+  border-color:rgba(17,17,17,.22);
+  color:#111;
+}
+body:has(.cinematic-hero) .nav-organizer:hover{
+  background:#e45124;
+  border-color:#e45124;
+  color:#fff;
+}
+body:has(.cinematic-hero) .section-tag{
+  background:rgba(228,81,36,.09);
+}
+body:has(.cinematic-hero) .payment-proof .section-tag{
+  background:rgba(228,81,36,.16);
+}
+body:has(.cinematic-hero) .payment-proof .qr-list::-webkit-scrollbar-thumb{
+  background:#e45124;
+}
+body:has(.cinematic-hero) footer{
+  background:#111;
+  color:#fff;
+}
+body:has(.cinematic-hero) footer strong,
+body:has(.cinematic-hero) footer p,
+body:has(.cinematic-hero) footer a{
+  color:#fff;
+}
+body:has(.cinematic-hero) footer strong span,
+body:has(.cinematic-hero) footer a:hover{
+  color:#e45124;
+}
