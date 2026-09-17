@@ -102,6 +102,9 @@ grant execute on function public.list_civil_organizer_requests() to authenticate
 grant execute on function public.approve_civil_organizer(uuid) to authenticated;
 grant execute on function public.reject_civil_organizer(uuid) to authenticated;
 
+-- Refresh PostgREST so the new RPCs are visible immediately after this migration.
+notify pgrst, 'reload schema';
+
 -- Ensure the main admin is also an active Civil organizer and can verify payments.
 insert into public.organizers(user_id, active)
 select id, true from auth.users
