@@ -9,6 +9,7 @@ window.CIVIL_CONFIG = {
     { id: 'pqdmshreeambasta@okicici', name: 'Rudra Abhishek' }
   ],
   contribution: 0,
+  venue: 'Sanjeevni Resort',
   juniorContribution: 700,
   seniorContribution: 1400
 };
